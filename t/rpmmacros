@@ -1,0 +1,8 @@
+# rpmmacros test file for perl-RPM4
+# $Id: rpmmacros 36 2005-10-04 04:08:46Z nanardon $
+
+%RPM4         perl-RPM4
+
+%_tmppath %(pwd)/testdir
+%_builddir %(pwd)/testdir
+%_topdir %(pwd)/testdir

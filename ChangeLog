@@ -1,0 +1,392 @@
+------------------------------------------------------------------------
+r36 | nanardon | 2005-10-04 06:08:46 +0200 (mar, 04 oct 2005) | 1 line
+Chemins modifiés :
+   D /RPM4
+   A /trunk/RPM4 (de /RPM4:32)
+   M /trunk/RPM4/bin/hrpmreb
+   M /trunk/RPM4/bin/rpmresign
+   M /trunk/RPM4/bin/urpm_interactive
+   M /trunk/RPM4/examples/hbuildspec
+   M /trunk/RPM4/examples/hdinfo
+   M /trunk/RPM4/examples/hdlistq
+   M /trunk/RPM4/examples/hdrpmq
+   M /trunk/RPM4/examples/hinfo
+   M /trunk/RPM4/examples/rpminstall
+   M /trunk/RPM4/examples/specwillbuild
+   M /trunk/RPM4/lib/RPM4/Header/Changelogs.pm
+   M /trunk/RPM4/lib/RPM4/Header/Files.pm
+   M /trunk/RPM4/lib/RPM4/Header.pm
+   M /trunk/RPM4/lib/RPM4/Index.pm
+   M /trunk/RPM4/lib/RPM4/Media.pm
+   M /trunk/RPM4/lib/RPM4/Transaction/Problems.pm
+   M /trunk/RPM4/lib/RPM4.pm
+   M /trunk/RPM4/src/RPM4.h
+   M /trunk/RPM4/src/RPM4sign.c
+   M /trunk/RPM4/t/01compile.t
+   M /trunk/RPM4/t/02header.t
+   M /trunk/RPM4/t/03rpmlib.t
+   M /trunk/RPM4/t/06sign.t
+   M /trunk/RPM4/t/07changelogs.t
+   M /trunk/RPM4/t/07dep.t
+   M /trunk/RPM4/t/07files.t
+   M /trunk/RPM4/t/09hdlist.t
+   M /trunk/RPM4/t/11media.t
+   M /trunk/RPM4/t/gnupg/passphrase
+   M /trunk/RPM4/t/rpmmacros
+   M /trunk/RPM4/t/rpmrc
+   M /trunk/RPM4/t/test-dep.spec
+   M /trunk/RPM4/t/test-rpm.spec
+
+- move to trunk
+------------------------------------------------------------------------
+r32 | nanardon | 2005-10-04 05:45:58 +0200 (mar, 04 oct 2005) | 1 line
+Chemins modifiés :
+   M /RPM4/lib/RPM4/Header/Dependencies.pm
+
+- POD fix
+------------------------------------------------------------------------
+r31 | nanardon | 2005-10-04 05:43:15 +0200 (mar, 04 oct 2005) | 1 line
+Chemins modifiés :
+   M /RPM4/src/Makefile.PL
+   M /RPM4/src/RPM4.xs
+
+- detect librpmconstant, if present, use it
+------------------------------------------------------------------------
+r30 | nanardon | 2005-10-04 05:22:10 +0200 (mar, 04 oct 2005) | 1 line
+Chemins modifiés :
+   M /RPM4/MANIFEST
+   M /RPM4/Makefile.PL
+   M /RPM4/src/Makefile.PL
+   M /RPM4/src/RPM4.xs
+
+- provide rpmconstant inside RPM4
+------------------------------------------------------------------------
+r27 | nanardon | 2005-08-20 23:22:55 +0200 (sam, 20 aoû 2005) | 1 line
+Chemins modifiés :
+   M /RPM4/src/RPM4.xs
+
+fix typo
+------------------------------------------------------------------------
+r26 | nanardon | 2005-08-10 22:18:40 +0200 (mer, 10 aoû 2005) | 2 lines
+Chemins modifiés :
+   M /RPM4/lib/RPM4/Header/Checks.pm
+
+- initial test case
+
+------------------------------------------------------------------------
+r25 | nanardon | 2005-08-10 21:05:34 +0200 (mer, 10 aoû 2005) | 1 line
+Chemins modifiés :
+   A /RPM4/examples/checkhdr
+   A /RPM4/lib/RPM4/Header/Checks.pm
+
+- add checks
+------------------------------------------------------------------------
+r24 | nanardon | 2005-08-08 14:47:51 +0200 (lun, 08 aoû 2005) | 1 line
+Chemins modifiés :
+   M /RPM4/examples/hdlist2sdb
+
+- add verbose
+------------------------------------------------------------------------
+r23 | nanardon | 2005-08-07 23:32:46 +0200 (dim, 07 aoû 2005) | 1 line
+Chemins modifiés :
+   M /RPM4/bin/rpm_produced
+   M /RPM4/t/05transaction.t
+
+- use TMPDIR for test to avoid locking isse on nfs home
+------------------------------------------------------------------------
+r22 | nanardon | 2005-07-10 02:48:27 +0200 (dim, 10 jui 2005) | 1 line
+Chemins modifiés :
+   M /RPM4/src/RPM4.xs
+
+- remove old comment
+------------------------------------------------------------------------
+r21 | nanardon | 2005-07-10 02:23:53 +0200 (dim, 10 jui 2005) | 1 line
+Chemins modifiés :
+   M /RPM4/lib/RPM4/Transaction.pm
+   M /RPM4/src/RPM4.xs
+   M /RPM4/t/05transaction.t
+
+ move ts->specnew from C to perl
+------------------------------------------------------------------------
+r20 | nanardon | 2005-07-10 01:52:17 +0200 (dim, 10 jui 2005) | 1 line
+Chemins modifiés :
+   M /RPM4/lib/RPM4/Spec.pm
+   M /RPM4/src/RPM4.xs
+   M /RPM4/t/04spec.t
+
+- add real RPM::SPEC->new()
+------------------------------------------------------------------------
+r19 | nanardon | 2005-07-09 01:14:45 +0200 (sam, 09 jui 2005) | 2 lines
+Chemins modifiés :
+   M /RPM4/src/RPM4.xs
+   M /RPM4/t/05transaction.t
+
+- disable some script
+
+------------------------------------------------------------------------
+r18 | nanardon | 2005-07-09 01:05:01 +0200 (sam, 09 jui 2005) | 2 lines
+Chemins modifiés :
+   M /RPM4/MANIFEST
+   M /RPM4/Makefile.PL
+   M /RPM4/README
+   M /RPM4/bin/hrpmreb
+   M /RPM4/bin/rpm_produced
+   M /RPM4/bin/rpmresign
+   M /RPM4/bin/urpm_interactive
+   M /RPM4/examples/hbuildspec
+   M /RPM4/examples/hdinfo
+   M /RPM4/examples/hdlist2sdb
+   M /RPM4/examples/hdlistq
+   M /RPM4/examples/hdrpmq
+   M /RPM4/examples/hinfo
+   M /RPM4/examples/hrpmreb-macros
+   M /RPM4/examples/rpminstall
+   M /RPM4/examples/specwillbuild
+   M /RPM4/lib/RPM4/Header/Changelogs.pm
+   M /RPM4/lib/RPM4/Header/Dependencies.pm
+   M /RPM4/lib/RPM4/Header/Files.pm
+   M /RPM4/lib/RPM4/Header.pm
+   M /RPM4/lib/RPM4/Index.pm
+   M /RPM4/lib/RPM4/Media.pm
+   M /RPM4/lib/RPM4/Spec.pm
+   M /RPM4/lib/RPM4/Transaction/Problems.pm
+   M /RPM4/lib/RPM4/Transaction.pm
+   M /RPM4/lib/RPM4.pm
+   M /RPM4/patches/Makefile.PL.staticrpm.patch
+   M /RPM4/src/Makefile.PL
+   M /RPM4/src/RPM4.h
+   M /RPM4/src/RPM4.xs
+   M /RPM4/src/RPM4sign.c
+   M /RPM4/src/typemap
+   M /RPM4/t/01compile.t
+   M /RPM4/t/02header.t
+   M /RPM4/t/03rpmlib.t
+   M /RPM4/t/04spec.t
+   M /RPM4/t/05transaction.t
+   M /RPM4/t/06sign.t
+   M /RPM4/t/07changelogs.t
+   M /RPM4/t/07dep.t
+   M /RPM4/t/07files.t
+   M /RPM4/t/09hdlist.t
+   M /RPM4/t/11media.t
+   M /RPM4/t/gnupg/passphrase
+   M /RPM4/t/gnupg/pubring.gpg
+   M /RPM4/t/gnupg/secring.gpg
+   M /RPM4/t/gnupg/test-key.gpg
+   M /RPM4/t/gnupg/trustdb.gpg
+   M /RPM4/t/rpmmacros
+   M /RPM4/t/rpmrc
+   M /RPM4/t/test-dep-1.0-1mdk.noarch.rpm
+   M /RPM4/t/test-dep-1.0-1mdk.src.rpm
+   M /RPM4/t/test-dep.spec
+   M /RPM4/t/test-rpm-1.0-1mdk.noarch.rpm
+   M /RPM4/t/test-rpm-1.0-1mdk.src.rpm
+   M /RPM4/t/test-rpm.spec
+
+- propset $Id$
+
+------------------------------------------------------------------------
+r17 | nanardon | 2005-07-09 00:59:03 +0200 (sam, 09 jui 2005) | 4 lines
+Chemins modifiés :
+   M /RPM4/MANIFEST
+   A /RPM4/README
+   M /RPM4/lib/RPM4/Spec.pm
+   M /RPM4/lib/RPM4/Transaction.pm
+   M /RPM4/src/RPM4.xs
+
+- fix MANIFEST
+- fix test 04
+- Transaction::Problems change
+
+------------------------------------------------------------------------
+r16 | nanardon | 2005-07-09 00:40:45 +0200 (sam, 09 jui 2005) | 2 lines
+Chemins modifiés :
+   M /RPM4/t/01compile.t
+
+- Fix against now missing functions
+
+------------------------------------------------------------------------
+r15 | nanardon | 2005-07-09 00:34:05 +0200 (sam, 09 jui 2005) | 1 line
+Chemins modifiés :
+   M /RPM4/lib/RPM4/Transaction/Problems.pm
+
+new method
+------------------------------------------------------------------------
+r14 | nanardon | 2005-07-08 21:40:33 +0200 (ven, 08 jui 2005) | 1 line
+Chemins modifiés :
+   D /RPM4/lib/RPM4/Db
+   D /RPM4/lib/RPM4/Db.pm
+   M /RPM4/lib/RPM4/Spec.pm
+   A /RPM4/lib/RPM4/Transaction (de /RPM4/lib/RPM4/Db:8)
+   R /RPM4/lib/RPM4/Transaction/Problems.pm (de /RPM4/lib/RPM4/Db/Problems.pm:9)
+   A /RPM4/lib/RPM4/Transaction.pm (de /RPM4/lib/RPM4/Db.pm:9)
+
+rename class
+------------------------------------------------------------------------
+r13 | nanardon | 2005-07-08 17:49:37 +0200 (ven, 08 jui 2005) | 1 line
+Chemins modifiés :
+   D /RPM4/t/05rpmdb.t
+
+rename class
+------------------------------------------------------------------------
+r12 | nanardon | 2005-07-08 17:49:16 +0200 (ven, 08 jui 2005) | 1 line
+Chemins modifiés :
+   A /RPM4/t/05transaction.t (de /RPM4/t/05rpmdb.t:9)
+
+rename class
+------------------------------------------------------------------------
+r11 | nanardon | 2005-07-08 17:49:05 +0200 (ven, 08 jui 2005) | 1 line
+Chemins modifiés :
+   M /RPM4/lib/RPM4.pm
+
+rename class
+------------------------------------------------------------------------
+r10 | nanardon | 2005-07-08 17:48:53 +0200 (ven, 08 jui 2005) | 1 line
+Chemins modifiés :
+   M /RPM4/src/RPM4.xs
+
+rename class
+------------------------------------------------------------------------
+r9 | nanardon | 2005-07-07 21:43:32 +0200 (jeu, 07 jui 2005) | 2 lines
+Chemins modifiés :
+   A /RPM4/MANIFEST
+   A /RPM4/Makefile.PL
+   M /RPM4/lib/RPM4/Db/Problems.pm
+   M /RPM4/lib/RPM4/Db.pm
+   M /RPM4/lib/RPM4/Header/Changelogs.pm
+   M /RPM4/lib/RPM4/Header/Dependencies.pm
+   M /RPM4/lib/RPM4/Header/Files.pm
+   M /RPM4/lib/RPM4/Header.pm
+   M /RPM4/lib/RPM4/Index.pm
+   A /RPM4/lib/RPM4/Media.pm
+   M /RPM4/lib/RPM4/Spec.pm
+   M /RPM4/lib/RPM4.pm
+   D /RPM4/patch
+   M /RPM4/src/RPM4.xs
+   M /RPM4/t/01compile.t
+   M /RPM4/t/02header.t
+   M /RPM4/t/03rpmlib.t
+   M /RPM4/t/04spec.t
+   M /RPM4/t/05rpmdb.t
+   M /RPM4/t/06sign.t
+   M /RPM4/t/07changelogs.t
+   M /RPM4/t/07dep.t
+   M /RPM4/t/07files.t
+   M /RPM4/t/09hdlist.t
+   M /RPM4/t/11media.t
+   M /RPM4/t/gnupg/passphrase
+   M /RPM4/t/gnupg/pubring.gpg
+   M /RPM4/t/gnupg/secring.gpg
+   M /RPM4/t/gnupg/trustdb.gpg
+   M /RPM4/t/rpmmacros
+
+- all test ok
+
+------------------------------------------------------------------------
+r8 | nanardon | 2005-07-07 19:07:53 +0200 (jeu, 07 jui 2005) | 2 lines
+Chemins modifiés :
+   A /RPM4/lib/RPM4
+   A /RPM4/lib/RPM4/Db
+   A /RPM4/lib/RPM4/Db/Problems.pm
+   A /RPM4/lib/RPM4/Db.pm
+   A /RPM4/lib/RPM4/Header
+   A /RPM4/lib/RPM4/Header/Changelogs.pm
+   A /RPM4/lib/RPM4/Header/Dependencies.pm
+   A /RPM4/lib/RPM4/Header/Files.pm
+   A /RPM4/lib/RPM4/Header.pm
+   A /RPM4/lib/RPM4/Index.pm
+   A /RPM4/lib/RPM4/Spec.pm
+
+- move from mandriva cvs
+
+------------------------------------------------------------------------
+r7 | nanardon | 2005-07-07 18:59:18 +0200 (jeu, 07 jui 2005) | 2 lines
+Chemins modifiés :
+   A /RPM4/patches (de /RPM4/patch:6)
+   A /RPM4/patches/Makefile.PL.staticrpm.patch
+
+- add
+
+------------------------------------------------------------------------
+r6 | nanardon | 2005-07-07 18:58:36 +0200 (jeu, 07 jui 2005) | 2 lines
+Chemins modifiés :
+   A /RPM4/patch
+
+-add
+
+------------------------------------------------------------------------
+r5 | nanardon | 2005-07-07 18:57:01 +0200 (jeu, 07 jui 2005) | 2 lines
+Chemins modifiés :
+   A /RPM4/lib
+   A /RPM4/lib/RPM4.pm
+
+- move from mandriva cvs
+
+------------------------------------------------------------------------
+r4 | nanardon | 2005-07-07 18:55:19 +0200 (jeu, 07 jui 2005) | 2 lines
+Chemins modifiés :
+   M /RPM4/src/RPM4sign.c
+
+- fix #include
+
+------------------------------------------------------------------------
+r3 | nanardon | 2005-07-07 18:42:22 +0200 (jeu, 07 jui 2005) | 3 lines
+Chemins modifiés :
+   A /RPM4/src
+   A /RPM4/src/Makefile.PL
+   A /RPM4/src/RPM4.h
+   A /RPM4/src/RPM4.xs
+   A /RPM4/src/RPM4sign.c
+   A /RPM4/src/typemap
+
+- move from mandriva
+- rename to rpm4
+
+------------------------------------------------------------------------
+r2 | nanardon | 2005-07-07 12:36:09 +0200 (jeu, 07 jui 2005) | 1 line
+Chemins modifiés :
+   A /RPM4
+   A /RPM4/bin
+   A /RPM4/bin/hrpmreb
+   A /RPM4/bin/rpm_produced
+   A /RPM4/bin/rpmresign
+   A /RPM4/bin/urpm_interactive
+   A /RPM4/examples
+   A /RPM4/examples/hbuildspec
+   A /RPM4/examples/hdinfo
+   A /RPM4/examples/hdlist2sdb
+   A /RPM4/examples/hdlistq
+   A /RPM4/examples/hdrpmq
+   A /RPM4/examples/hinfo
+   A /RPM4/examples/hrpmreb-macros
+   A /RPM4/examples/rpminstall
+   A /RPM4/examples/specwillbuild
+   A /RPM4/t
+   A /RPM4/t/01compile.t
+   A /RPM4/t/02header.t
+   A /RPM4/t/03rpmlib.t
+   A /RPM4/t/04spec.t
+   A /RPM4/t/05rpmdb.t
+   A /RPM4/t/06sign.t
+   A /RPM4/t/07changelogs.t
+   A /RPM4/t/07dep.t
+   A /RPM4/t/07files.t
+   A /RPM4/t/09hdlist.t
+   A /RPM4/t/11media.t
+   A /RPM4/t/gnupg
+   A /RPM4/t/gnupg/passphrase
+   A /RPM4/t/gnupg/pubring.gpg
+   A /RPM4/t/gnupg/secring.gpg
+   A /RPM4/t/gnupg/test-key.gpg
+   A /RPM4/t/gnupg/trustdb.gpg
+   A /RPM4/t/rpmmacros
+   A /RPM4/t/rpmrc
+   A /RPM4/t/test-dep-1.0-1mdk.noarch.rpm
+   A /RPM4/t/test-dep-1.0-1mdk.src.rpm
+   A /RPM4/t/test-dep.spec
+   A /RPM4/t/test-rpm-1.0-1mdk.noarch.rpm
+   A /RPM4/t/test-rpm-1.0-1mdk.src.rpm
+   A /RPM4/t/test-rpm.spec
+
+- move from mandriva svn
+------------------------------------------------------------------------
