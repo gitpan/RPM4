@@ -1,4 +1,4 @@
-# $Id: Makefile.PL 36 2005-10-04 04:08:46Z nanardon $
+# $Id: Makefile.PL 50 2005-12-14 15:48:56Z nanardon $
 
 # use 5.008;
 use ExtUtils::MakeMaker;
@@ -17,7 +17,7 @@ sub MY::postamble {
 .PHONY: ChangeLog
 
 ChangeLog:
-	svn update && svn log --verbose > \$@
+	LC_ALL=C svn update && LC_ALL=C svn log --verbose > \$@
 
 rpm: dist
 	rpm --rmsource --define "_sourcedir `pwd`" -ba perl-Hdlist.spec
@@ -29,8 +29,4 @@ WriteMakefile(
     VERSION_FROM => 'lib/RPM4.pm',
     DIR          => [ 'src' ],
     'EXE_FILES'  => [ qw(bin/rpm_produced bin/rpmresign bin/hrpmreb) ],
-    dist => {
-        COMPRESS => 'bzip2 --best',
-        SUFFIX => '.bz2',
-    }, 
 );

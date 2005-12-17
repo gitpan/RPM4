@@ -14,7 +14,7 @@
 ##- along with this program; if not, write to the Free Software
 ##- Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #
-# $Id: RPM4.pm 36 2005-10-04 04:08:46Z nanardon $
+# $Id: RPM4.pm 60 2005-12-17 15:17:10Z nanardon $
 
 package RPM4;
 
@@ -30,7 +30,7 @@ use RPM4::Header::Dependencies;
 use RPM4::Header::Files;
 use RPM4::Spec;
 
-our $VERSION = '0.01';
+our $VERSION = '0.10';
 our @ISA = qw(DynaLoader Exporter);
 our @EXPORT = qw(moduleinfo
                  readconfig querytag tagName tagValue expand rpmvercmp
@@ -190,7 +190,7 @@ __END__
 
 =head1 NAME
 
-RPM4 - perl module to handle hdlist and synthesis files
+RPM4 - perl module to access and manipulate RPM files
 
 =head1 SYNOPSIS
 
@@ -412,6 +412,45 @@ Rebuild the rpm database located into I<%{_dbpath}> (useally /var/lib/rpm).
 If set, $rootdir is the root directory of system.
 
 Returns 0 on success.
+
+=head2 rpmlibdep()
+
+Create a RPM4::Header::Dependencies object about rpmlib
+internals provides
+
+=head2 rpmsysinfodep($file)
+
+Return a RPM4::Header::Dependencies object about sysinfo file,
+$file is an optionnal file to, default depend of rpm.
+
+Since rpm 3.3.3, return undef on older version
+
+=head2 rpmgetconfdep($path)
+
+Return a RPM4::Header::Dependencies object about getconf,
+$path is an optionnal path to use, default is /.
+
+Since rpm 3.3.3, return undef on older version
+
+=head2 rpmcpuinfodep($file)
+
+Return a RPM4::Header::Dependencies object about cpuinfo,
+$file is an optionnal file to use, default is /proc/cpuinfo.
+
+Since rpm 3.3.3, return undef on older version
+
+=head2 rpmunamedep
+
+Return a RPM4::Header::Dependencies object from uname().
+
+Since rpm 3.3.3, return undef on older version
+
+=head2 rpmpipedep($cmd)
+
+Return a RPM4::Header::Dependencies from a command using.
+(It use a pipe internally). $cmd is the command to use.
+
+Since rpm 3.3.3, return undef on older version
 
 =head1 SEE ALSO
 

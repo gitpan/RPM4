@@ -1,8 +1,153 @@
 ------------------------------------------------------------------------
-r36 | nanardon | 2005-10-04 06:08:46 +0200 (mar, 04 oct 2005) | 1 line
-Chemins modifiés :
+r60 | nanardon | 2005-12-17 16:17:10 +0100 (Sat, 17 Dec 2005) | 1 line
+Changed paths:
+   M /trunk/RPM4/lib/RPM4.pm
+
+update doc
+------------------------------------------------------------------------
+r59 | nanardon | 2005-12-17 14:50:38 +0100 (Sat, 17 Dec 2005) | 1 line
+Changed paths:
+   M /trunk/RPM4/src/RPM4.xs
+   M /trunk/RPM4/t/07dep.t
+
+- add functions and test
+------------------------------------------------------------------------
+r58 | nanardon | 2005-12-17 13:37:06 +0100 (Sat, 17 Dec 2005) | 1 line
+Changed paths:
+   M /trunk/RPM4/src/RPM4.xs
+
+- fix moduleinfo()
+------------------------------------------------------------------------
+r57 | nanardon | 2005-12-17 13:22:25 +0100 (Sat, 17 Dec 2005) | 1 line
+Changed paths:
+   M /trunk/RPM4/src/RPM4.xs
+
+- add rpmcpuinfo
+------------------------------------------------------------------------
+r56 | nanardon | 2005-12-17 13:20:21 +0100 (Sat, 17 Dec 2005) | 1 line
+Changed paths:
+   M /trunk/RPM4/src/RPM4.xs
+
+- fix rpmlibgetconf()
+------------------------------------------------------------------------
+r55 | nanardon | 2005-12-14 18:29:28 +0100 (Wed, 14 Dec 2005) | 1 line
+Changed paths:
+   M /trunk/RPM4/src/RPM4.xs
+
+- add binding for rpm 4.4.3
+------------------------------------------------------------------------
+r54 | nanardon | 2005-12-14 18:01:18 +0100 (Wed, 14 Dec 2005) | 1 line
+Changed paths:
+   M /trunk/RPM4/lib/RPM4.pm
+
+- next version will be 0.1, using latest for branch fix
+------------------------------------------------------------------------
+r53 | nanardon | 2005-12-14 18:00:35 +0100 (Wed, 14 Dec 2005) | 1 line
+Changed paths:
+   M /trunk/RPM4/src/RPM4.xs
+
+- use new rpmlib function, Have I already rpm sucks?
+------------------------------------------------------------------------
+r52 | nanardon | 2005-12-14 17:59:57 +0100 (Wed, 14 Dec 2005) | 1 line
+Changed paths:
+   M /trunk/RPM4/src/RPM4.h
+
+- use rpmversion.h
+------------------------------------------------------------------------
+r51 | nanardon | 2005-12-14 17:59:25 +0100 (Wed, 14 Dec 2005) | 1 line
+Changed paths:
+   M /trunk/RPM4/src/Makefile.PL
+
+- generate a .h to find what rpm can do
+------------------------------------------------------------------------
+r50 | nanardon | 2005-12-14 16:48:56 +0100 (Wed, 14 Dec 2005) | 1 line
+Changed paths:
+   M /trunk/RPM4/Makefile.PL
+
+- build .gz for CPAN by default
+------------------------------------------------------------------------
+r49 | nanardon | 2005-12-14 16:44:53 +0100 (Wed, 14 Dec 2005) | 1 line
+Changed paths:
+   M /trunk/RPM4/bin/hrpmreb
+
+- fix hrpmreb with RPM4 (remove Hdlist code)
+------------------------------------------------------------------------
+r48 | nanardon | 2005-11-16 21:59:53 +0100 (Wed, 16 Nov 2005) | 1 line
+Changed paths:
+   M /trunk/RPM4/lib/RPM4/Index.pm
+
+- use MDV:: module
+------------------------------------------------------------------------
+r47 | nanardon | 2005-10-19 07:48:49 +0200 (Wed, 19 Oct 2005) | 1 line
+Changed paths:
+   M /trunk/RPM4/lib/RPM4/Header/Files.pm
+
+- fix doc
+------------------------------------------------------------------------
+r46 | nanardon | 2005-10-19 07:42:05 +0200 (Wed, 19 Oct 2005) | 1 line
+Changed paths:
+   M /trunk/RPM4/lib/RPM4/Header/Changelogs.pm
+   M /trunk/RPM4/lib/RPM4/Header/Dependencies.pm
+
+- podchecker fix
+------------------------------------------------------------------------
+r45 | nanardon | 2005-10-19 07:39:18 +0200 (Wed, 19 Oct 2005) | 1 line
+Changed paths:
+   M /trunk/RPM4/lib/RPM4/Header.pm
+
+- remove redundante and false module name in doc
+------------------------------------------------------------------------
+r44 | nanardon | 2005-10-19 07:34:31 +0200 (Wed, 19 Oct 2005) | 1 line
+Changed paths:
+   M /trunk/RPM4/lib/RPM4/Header/Changelogs.pm
+
+- add docs
+------------------------------------------------------------------------
+r43 | nanardon | 2005-10-19 07:12:54 +0200 (Wed, 19 Oct 2005) | 1 line
+Changed paths:
+   M /trunk/RPM4/lib/RPM4.pm
+
+-v 0.02, fix desc
+------------------------------------------------------------------------
+r42 | nanardon | 2005-10-08 19:31:44 +0200 (Sat, 08 Oct 2005) | 1 line
+Changed paths:
+   M /trunk/RPM4/examples/hbuildspec
+   M /trunk/RPM4/examples/hdinfo
+   M /trunk/RPM4/examples/hdlist2sdb
+   M /trunk/RPM4/examples/hdlistq
+   M /trunk/RPM4/examples/hdrpmq
+   M /trunk/RPM4/examples/hinfo
+   M /trunk/RPM4/examples/rpminstall
+   M /trunk/RPM4/examples/specwillbuild
+
+- code was still using Hdlist :\
+------------------------------------------------------------------------
+r41 | nanardon | 2005-10-08 19:30:58 +0200 (Sat, 08 Oct 2005) | 1 line
+Changed paths:
+   M /trunk/RPM4/bin/hrpmreb
+   M /trunk/RPM4/bin/rpm_produced
+   M /trunk/RPM4/bin/rpmresign
+   M /trunk/RPM4/bin/urpm_interactive
+
+- code was still using Hdlist :\
+------------------------------------------------------------------------
+r40 | nanardon | 2005-10-05 23:53:25 +0200 (Wed, 05 Oct 2005) | 1 line
+Changed paths:
+   M /trunk/RPM4/Makefile.PL
+   M /trunk/rpmconstant/Makefile.am
+
+- use LC_ALL=C to make changelog
+------------------------------------------------------------------------
+r37 | nanardon | 2005-10-04 06:15:52 +0200 (Tue, 04 Oct 2005) | 1 line
+Changed paths:
+   M /trunk/RPM4/lib/RPM4.pm
+
+- 0.01
+------------------------------------------------------------------------
+r36 | nanardon | 2005-10-04 06:08:46 +0200 (Tue, 04 Oct 2005) | 1 line
+Changed paths:
    D /RPM4
-   A /trunk/RPM4 (de /RPM4:32)
+   A /trunk/RPM4 (from /RPM4:32)
    M /trunk/RPM4/bin/hrpmreb
    M /trunk/RPM4/bin/rpmresign
    M /trunk/RPM4/bin/urpm_interactive
@@ -39,21 +184,21 @@ Chemins modifiés :
 
 - move to trunk
 ------------------------------------------------------------------------
-r32 | nanardon | 2005-10-04 05:45:58 +0200 (mar, 04 oct 2005) | 1 line
-Chemins modifiés :
+r32 | nanardon | 2005-10-04 05:45:58 +0200 (Tue, 04 Oct 2005) | 1 line
+Changed paths:
    M /RPM4/lib/RPM4/Header/Dependencies.pm
 
 - POD fix
 ------------------------------------------------------------------------
-r31 | nanardon | 2005-10-04 05:43:15 +0200 (mar, 04 oct 2005) | 1 line
-Chemins modifiés :
+r31 | nanardon | 2005-10-04 05:43:15 +0200 (Tue, 04 Oct 2005) | 1 line
+Changed paths:
    M /RPM4/src/Makefile.PL
    M /RPM4/src/RPM4.xs
 
 - detect librpmconstant, if present, use it
 ------------------------------------------------------------------------
-r30 | nanardon | 2005-10-04 05:22:10 +0200 (mar, 04 oct 2005) | 1 line
-Chemins modifiés :
+r30 | nanardon | 2005-10-04 05:22:10 +0200 (Tue, 04 Oct 2005) | 1 line
+Changed paths:
    M /RPM4/MANIFEST
    M /RPM4/Makefile.PL
    M /RPM4/src/Makefile.PL
@@ -61,71 +206,71 @@ Chemins modifiés :
 
 - provide rpmconstant inside RPM4
 ------------------------------------------------------------------------
-r27 | nanardon | 2005-08-20 23:22:55 +0200 (sam, 20 aoû 2005) | 1 line
-Chemins modifiés :
+r27 | nanardon | 2005-08-20 23:22:55 +0200 (Sat, 20 Aug 2005) | 1 line
+Changed paths:
    M /RPM4/src/RPM4.xs
 
 fix typo
 ------------------------------------------------------------------------
-r26 | nanardon | 2005-08-10 22:18:40 +0200 (mer, 10 aoû 2005) | 2 lines
-Chemins modifiés :
+r26 | nanardon | 2005-08-10 22:18:40 +0200 (Wed, 10 Aug 2005) | 2 lines
+Changed paths:
    M /RPM4/lib/RPM4/Header/Checks.pm
 
 - initial test case
 
 ------------------------------------------------------------------------
-r25 | nanardon | 2005-08-10 21:05:34 +0200 (mer, 10 aoû 2005) | 1 line
-Chemins modifiés :
+r25 | nanardon | 2005-08-10 21:05:34 +0200 (Wed, 10 Aug 2005) | 1 line
+Changed paths:
    A /RPM4/examples/checkhdr
    A /RPM4/lib/RPM4/Header/Checks.pm
 
 - add checks
 ------------------------------------------------------------------------
-r24 | nanardon | 2005-08-08 14:47:51 +0200 (lun, 08 aoû 2005) | 1 line
-Chemins modifiés :
+r24 | nanardon | 2005-08-08 14:47:51 +0200 (Mon, 08 Aug 2005) | 1 line
+Changed paths:
    M /RPM4/examples/hdlist2sdb
 
 - add verbose
 ------------------------------------------------------------------------
-r23 | nanardon | 2005-08-07 23:32:46 +0200 (dim, 07 aoû 2005) | 1 line
-Chemins modifiés :
+r23 | nanardon | 2005-08-07 23:32:46 +0200 (Sun, 07 Aug 2005) | 1 line
+Changed paths:
    M /RPM4/bin/rpm_produced
    M /RPM4/t/05transaction.t
 
 - use TMPDIR for test to avoid locking isse on nfs home
 ------------------------------------------------------------------------
-r22 | nanardon | 2005-07-10 02:48:27 +0200 (dim, 10 jui 2005) | 1 line
-Chemins modifiés :
+r22 | nanardon | 2005-07-10 02:48:27 +0200 (Sun, 10 Jul 2005) | 1 line
+Changed paths:
    M /RPM4/src/RPM4.xs
 
 - remove old comment
 ------------------------------------------------------------------------
-r21 | nanardon | 2005-07-10 02:23:53 +0200 (dim, 10 jui 2005) | 1 line
-Chemins modifiés :
+r21 | nanardon | 2005-07-10 02:23:53 +0200 (Sun, 10 Jul 2005) | 1 line
+Changed paths:
    M /RPM4/lib/RPM4/Transaction.pm
    M /RPM4/src/RPM4.xs
    M /RPM4/t/05transaction.t
 
  move ts->specnew from C to perl
 ------------------------------------------------------------------------
-r20 | nanardon | 2005-07-10 01:52:17 +0200 (dim, 10 jui 2005) | 1 line
-Chemins modifiés :
+r20 | nanardon | 2005-07-10 01:52:17 +0200 (Sun, 10 Jul 2005) | 1 line
+Changed paths:
    M /RPM4/lib/RPM4/Spec.pm
    M /RPM4/src/RPM4.xs
    M /RPM4/t/04spec.t
 
 - add real RPM::SPEC->new()
 ------------------------------------------------------------------------
-r19 | nanardon | 2005-07-09 01:14:45 +0200 (sam, 09 jui 2005) | 2 lines
-Chemins modifiés :
+r19 | nanardon | 2005-07-09 01:14:45 +0200 (Sat, 09 Jul 2005) | 2 lines
+Changed paths:
    M /RPM4/src/RPM4.xs
    M /RPM4/t/05transaction.t
 
 - disable some script
 
 ------------------------------------------------------------------------
-r18 | nanardon | 2005-07-09 01:05:01 +0200 (sam, 09 jui 2005) | 2 lines
-Chemins modifiés :
+r18 | nanardon | 2005-07-09 01:05:01 +0200 (Sat, 09 Jul 2005) | 2 lines
+Changed paths:
    M /RPM4/MANIFEST
    M /RPM4/Makefile.PL
    M /RPM4/README
@@ -186,8 +331,8 @@ Chemins modifiés :
 - propset $Id$
 
 ------------------------------------------------------------------------
-r17 | nanardon | 2005-07-09 00:59:03 +0200 (sam, 09 jui 2005) | 4 lines
-Chemins modifiés :
+r17 | nanardon | 2005-07-09 00:59:03 +0200 (Sat, 09 Jul 2005) | 4 lines
+Changed paths:
    M /RPM4/MANIFEST
    A /RPM4/README
    M /RPM4/lib/RPM4/Spec.pm
@@ -199,56 +344,56 @@ Chemins modifiés :
 - Transaction::Problems change
 
 ------------------------------------------------------------------------
-r16 | nanardon | 2005-07-09 00:40:45 +0200 (sam, 09 jui 2005) | 2 lines
-Chemins modifiés :
+r16 | nanardon | 2005-07-09 00:40:45 +0200 (Sat, 09 Jul 2005) | 2 lines
+Changed paths:
    M /RPM4/t/01compile.t
 
 - Fix against now missing functions
 
 ------------------------------------------------------------------------
-r15 | nanardon | 2005-07-09 00:34:05 +0200 (sam, 09 jui 2005) | 1 line
-Chemins modifiés :
+r15 | nanardon | 2005-07-09 00:34:05 +0200 (Sat, 09 Jul 2005) | 1 line
+Changed paths:
    M /RPM4/lib/RPM4/Transaction/Problems.pm
 
 new method
 ------------------------------------------------------------------------
-r14 | nanardon | 2005-07-08 21:40:33 +0200 (ven, 08 jui 2005) | 1 line
-Chemins modifiés :
+r14 | nanardon | 2005-07-08 21:40:33 +0200 (Fri, 08 Jul 2005) | 1 line
+Changed paths:
    D /RPM4/lib/RPM4/Db
    D /RPM4/lib/RPM4/Db.pm
    M /RPM4/lib/RPM4/Spec.pm
-   A /RPM4/lib/RPM4/Transaction (de /RPM4/lib/RPM4/Db:8)
-   R /RPM4/lib/RPM4/Transaction/Problems.pm (de /RPM4/lib/RPM4/Db/Problems.pm:9)
-   A /RPM4/lib/RPM4/Transaction.pm (de /RPM4/lib/RPM4/Db.pm:9)
+   A /RPM4/lib/RPM4/Transaction (from /RPM4/lib/RPM4/Db:8)
+   R /RPM4/lib/RPM4/Transaction/Problems.pm (from /RPM4/lib/RPM4/Db/Problems.pm:9)
+   A /RPM4/lib/RPM4/Transaction.pm (from /RPM4/lib/RPM4/Db.pm:9)
 
 rename class
 ------------------------------------------------------------------------
-r13 | nanardon | 2005-07-08 17:49:37 +0200 (ven, 08 jui 2005) | 1 line
-Chemins modifiés :
+r13 | nanardon | 2005-07-08 17:49:37 +0200 (Fri, 08 Jul 2005) | 1 line
+Changed paths:
    D /RPM4/t/05rpmdb.t
 
 rename class
 ------------------------------------------------------------------------
-r12 | nanardon | 2005-07-08 17:49:16 +0200 (ven, 08 jui 2005) | 1 line
-Chemins modifiés :
-   A /RPM4/t/05transaction.t (de /RPM4/t/05rpmdb.t:9)
+r12 | nanardon | 2005-07-08 17:49:16 +0200 (Fri, 08 Jul 2005) | 1 line
+Changed paths:
+   A /RPM4/t/05transaction.t (from /RPM4/t/05rpmdb.t:9)
 
 rename class
 ------------------------------------------------------------------------
-r11 | nanardon | 2005-07-08 17:49:05 +0200 (ven, 08 jui 2005) | 1 line
-Chemins modifiés :
+r11 | nanardon | 2005-07-08 17:49:05 +0200 (Fri, 08 Jul 2005) | 1 line
+Changed paths:
    M /RPM4/lib/RPM4.pm
 
 rename class
 ------------------------------------------------------------------------
-r10 | nanardon | 2005-07-08 17:48:53 +0200 (ven, 08 jui 2005) | 1 line
-Chemins modifiés :
+r10 | nanardon | 2005-07-08 17:48:53 +0200 (Fri, 08 Jul 2005) | 1 line
+Changed paths:
    M /RPM4/src/RPM4.xs
 
 rename class
 ------------------------------------------------------------------------
-r9 | nanardon | 2005-07-07 21:43:32 +0200 (jeu, 07 jui 2005) | 2 lines
-Chemins modifiés :
+r9 | nanardon | 2005-07-07 21:43:32 +0200 (Thu, 07 Jul 2005) | 2 lines
+Changed paths:
    A /RPM4/MANIFEST
    A /RPM4/Makefile.PL
    M /RPM4/lib/RPM4/Db/Problems.pm
@@ -283,8 +428,8 @@ Chemins modifiés :
 - all test ok
 
 ------------------------------------------------------------------------
-r8 | nanardon | 2005-07-07 19:07:53 +0200 (jeu, 07 jui 2005) | 2 lines
-Chemins modifiés :
+r8 | nanardon | 2005-07-07 19:07:53 +0200 (Thu, 07 Jul 2005) | 2 lines
+Changed paths:
    A /RPM4/lib/RPM4
    A /RPM4/lib/RPM4/Db
    A /RPM4/lib/RPM4/Db/Problems.pm
@@ -300,38 +445,38 @@ Chemins modifiés :
 - move from mandriva cvs
 
 ------------------------------------------------------------------------
-r7 | nanardon | 2005-07-07 18:59:18 +0200 (jeu, 07 jui 2005) | 2 lines
-Chemins modifiés :
-   A /RPM4/patches (de /RPM4/patch:6)
+r7 | nanardon | 2005-07-07 18:59:18 +0200 (Thu, 07 Jul 2005) | 2 lines
+Changed paths:
+   A /RPM4/patches (from /RPM4/patch:6)
    A /RPM4/patches/Makefile.PL.staticrpm.patch
 
 - add
 
 ------------------------------------------------------------------------
-r6 | nanardon | 2005-07-07 18:58:36 +0200 (jeu, 07 jui 2005) | 2 lines
-Chemins modifiés :
+r6 | nanardon | 2005-07-07 18:58:36 +0200 (Thu, 07 Jul 2005) | 2 lines
+Changed paths:
    A /RPM4/patch
 
 -add
 
 ------------------------------------------------------------------------
-r5 | nanardon | 2005-07-07 18:57:01 +0200 (jeu, 07 jui 2005) | 2 lines
-Chemins modifiés :
+r5 | nanardon | 2005-07-07 18:57:01 +0200 (Thu, 07 Jul 2005) | 2 lines
+Changed paths:
    A /RPM4/lib
    A /RPM4/lib/RPM4.pm
 
 - move from mandriva cvs
 
 ------------------------------------------------------------------------
-r4 | nanardon | 2005-07-07 18:55:19 +0200 (jeu, 07 jui 2005) | 2 lines
-Chemins modifiés :
+r4 | nanardon | 2005-07-07 18:55:19 +0200 (Thu, 07 Jul 2005) | 2 lines
+Changed paths:
    M /RPM4/src/RPM4sign.c
 
 - fix #include
 
 ------------------------------------------------------------------------
-r3 | nanardon | 2005-07-07 18:42:22 +0200 (jeu, 07 jui 2005) | 3 lines
-Chemins modifiés :
+r3 | nanardon | 2005-07-07 18:42:22 +0200 (Thu, 07 Jul 2005) | 3 lines
+Changed paths:
    A /RPM4/src
    A /RPM4/src/Makefile.PL
    A /RPM4/src/RPM4.h
@@ -343,8 +488,8 @@ Chemins modifiés :
 - rename to rpm4
 
 ------------------------------------------------------------------------
-r2 | nanardon | 2005-07-07 12:36:09 +0200 (jeu, 07 jui 2005) | 1 line
-Chemins modifiés :
+r2 | nanardon | 2005-07-07 12:36:09 +0200 (Thu, 07 Jul 2005) | 1 line
+Changed paths:
    A /RPM4
    A /RPM4/bin
    A /RPM4/bin/hrpmreb

@@ -14,7 +14,7 @@
 ##- along with this program; if not, write to the Free Software
 ##- Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #
-# $Id: Dependencies.pm 36 2005-10-04 04:08:46Z nanardon $
+# $Id: Dependencies.pm 46 2005-10-19 05:42:05Z nanardon $
 
 package RPM4::Header::Dependencies;
 
@@ -66,7 +66,7 @@ Move internal index to $index (0 by default).
 
 =head2 $deps->init
 
-Reset internal index and set it to -1, see L<$deps-\\>next()>
+Reset internal index and set it to -1, see L<next>
 
 =head2 $deps->hasnext
 

@@ -14,7 +14,7 @@
 ##- along with this program; if not, write to the Free Software
 ##- Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #
-# $Id: Files.pm 36 2005-10-04 04:08:46Z nanardon $
+# $Id: Files.pm 47 2005-10-19 05:48:49Z nanardon $
 
 package RPM4::Header::Files;
 
@@ -32,30 +32,34 @@ Hdlist::Header::Files - A set of files and directories
 
 =head1 METHODS
 
-=head2 $files->count()
+=head2 count()
 
 Return the number of files contained by this set.
 
-=head2 $files->countdir()
+=head2 countdir()
 
 Return the number of directories contained by this set.
 
-=head2 $files->init()
+=head2 init()
 
 Reset internal files index and set it to -1.
 
-=head2 $files->initdir()
+=head2 initdir()
 
 Reset internal directories index and set it to -1.
 
-=head2 $deps->next()
+=head2 next()
 
 Set current file to the next one in the set.
 
-=head2 $deps->nextdir()
+=head2 nextdir()
 
 Set current directory to the next one in the set.
 
-=head2 $files->move($index)
+=head2 move($index)
 
 Move internal file index to $index (0 by default).
+
+=head1 SEE ALSO
+
+L<RPM4::Header>

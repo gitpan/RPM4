@@ -16,16 +16,16 @@
 ##- along with this program; if not, write to the Free Software
 ##- Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
-# $Id: hdinfo 36 2005-10-04 04:08:46Z nanardon $
+# $Id: hdinfo 42 2005-10-08 17:31:44Z nanardon $
 
 use strict;
-use Hdlist;
+use RPM4;
 
-my $arch = Hdlist::getarchname();
+my $arch = RPM4::getarchname();
 print "arch = " . $arch . "\n";
 
-my $os = Hdlist::getosname();
+my $os = RPM4::getosname();
 print "os = " . $os . "\n";
 
-my $host = Hdlist::buildhost();
+my $host = RPM4::buildhost();
 print "host = " . $host . "\n";

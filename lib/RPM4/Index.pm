@@ -14,7 +14,7 @@
 ##- along with this program; if not, write to the Free Software
 ##- Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #
-# $Id: Index.pm 36 2005-10-04 04:08:46Z nanardon $
+# $Id: Index.pm 48 2005-11-16 20:59:53Z nanardon $
 
 package RPM4::Index;
 
@@ -23,7 +23,7 @@ use warnings;
 
 use RPM4;
 use RPM4::Header;
-use Packdrakeng;
+use MDV::Packdrakeng;
 
 use File::Temp qw(tempfile);
 
@@ -35,7 +35,7 @@ sub buildindex {
         $pid = open($h_synthesis, "| gzip --best > '$options{synthesis}'") or return 0;
     }
     if ($options{hdlist}) {
-        $pack = Packdrakeng->new(
+        $pack = MDV::Packdrakeng->new(
             archive => $options{hdlist},
             comp_level => $options{complevel},
         ) or return 0;
@@ -104,7 +104,7 @@ sub buildhdlist {
 
 sub parsehdlist {
     my (%options) = @_;
-    my $pack = Packdrakeng->open(archive => $options{hdlist}) or return 0;
+    my $pack = MDV::Packdrakeng->open(archive => $options{hdlist}) or return 0;
 
     my (undef, $files, undef) = $pack->getcontent();
     pipe(my $in, my $out);

@@ -14,7 +14,7 @@
 ##- along with this program; if not, write to the Free Software
 ##- Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #
-# $Id: Changelogs.pm 36 2005-10-04 04:08:46Z nanardon $
+# $Id: Changelogs.pm 46 2005-10-19 05:42:05Z nanardon $
 
 package RPM4::Header::Changelogs;
 
@@ -56,7 +56,6 @@ sub time {
     return ${$self->{changelogtime}}[$self->{_counter}];
 }
 
-
 1;
 
 __END__
@@ -65,9 +64,47 @@ __END__
 
 Hdlist::Header::Changelogs - A set of changelogs
 
+=head1 SYNOPSIS
+
+    use RPM4::Header;
+
+    my $header RPM4::Header->new("foo.rpm");
+    my $changelog = RPM4::Header::Changelog->new($header);
+    $changelog->init; # not need here
+    while ($changelog->hasnext) {
+        print "* ", $changelog->name, "\n";
+        print $changelog->text, "\n";
+    }
+
 =head1 METHODS
 
+=head2 new(header)
+
+Create a new changlelog set object from a rpm header.
+
+=head2 init
+
+Reset internal counter and prepare object for a first L<hasnext> call.
+
+=head2 hasnext
+
+Increase internal counter, return false if last entry has been reached.
+
+=head2 name
+
+Return the CHANGELOGNAME tag of current changelog entry.
+
+=head2 time
+
+Return the CHANGELOGTIME tag of current changelog entry.
+
+=head2 text
+
+Return the CHANGELOGTEXT tag of current changelog entry.
+
 =head1 SEE ALSO
+
+L<RPM4::Header>
 
 L<Hdlist>
 

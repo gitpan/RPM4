@@ -16,10 +16,10 @@
 ##- along with this program; if not, write to the Free Software
 ##- Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
-# $Id: hdrpmq 36 2005-10-04 04:08:46Z nanardon $
+# $Id: hdrpmq 42 2005-10-08 17:31:44Z nanardon $
 
 use strict;
-use Hdlist;
+use RPM4;
 use Getopt::Long;
 
 my $qf = "%{NAME}-%{VERSION}-%{RELEASE}.%{ARCH}\n";
@@ -30,7 +30,7 @@ my $go_res = GetOptions (
 
 ($go_res && @ARGV) or die 
 "$0 [--qf|--queryformat rpm_query] rpm1 [rpm2 [...]]
-Do something like `rpm -qp --queryformat' using perl-Hdlist
+Do something like `rpm -qp --queryformat' using perl-RPM4
 example: $0 --qf '%{NAME}\\n' test-rpm-1.0-1mdk.noarch.rpm
 ";
 

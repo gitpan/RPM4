@@ -14,7 +14,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA. */
 
-/* $Id: RPM4.xs 36 2005-10-04 04:08:46Z nanardon $ */
+/* $Id: RPM4.xs 59 2005-12-17 13:50:38Z nanardon $ */
 
 /* PREPROSSEUR FLAGS
  * HHACK: if defined, activate some functions or behaviour for expert user who
@@ -524,13 +524,16 @@ moduleinfo()
 #else
     XPUSHs(sv_2mortal(newSVpv("No", 0)));
 #endif
-    XPUSHs(sv_2mortal(newSVpv("RPMVERSION", 0)));
+    
     XPUSHs(sv_2mortal(newSVpv("RPMVERSION", 0)));
     XPUSHs(sv_2mortal(newSVpv(RPMVERSION, 0)));
+    
     XPUSHs(sv_2mortal(newSVpv("RPM4VERSION", 0)));
     XPUSHs(sv_2mortal(newSVpv(VERSION, 0)));
+    
     XPUSHs(sv_2mortal(newSVpv("RPMNAME", 0)));
     XPUSHs(sv_2mortal(newSVpv(rpmNAME, 0)));
+    
     XPUSHs(sv_2mortal(newSVpv("RPMEVR", 0)));
     XPUSHs(sv_2mortal(newSVpv(rpmEVR, 0)));
 
@@ -2054,13 +2057,16 @@ void
 rpmlibdep()
     PREINIT:
     rpmds Dep = NULL;
+#ifndef RPM4_4_3
     rpmds next;
     const char ** provNames;
     int * provFlags;
     const char ** provVersions;
     int num = 0;
     int i;
+#endif
     PPCODE:
+#ifndef RPM4_4_3
     num = rpmGetRpmlibProvides(&provNames, &provFlags, &provVersions);
     for (i = 0; i < num; i++) {
 #ifdef HDLISTDEBUG
@@ -2079,7 +2085,86 @@ rpmlibdep()
 #endif
         }
     }
+#else
+    if (!rpmdsRpmlib(&Dep, NULL))
+        XPUSHs(sv_2mortal(sv_setref_pv(newSVpv("", 0), bless_rpmds, Dep)));
+#endif
 
+void
+rpmsysinfodep(sysinfofile = NULL)
+    char * sysinfofile
+    PREINIT:
+#ifdef RPM4_4_3
+    rpmds Dep = NULL;
+#endif
+    PPCODE:
+#ifdef RPM4_4_3
+    if(!rpmdsSysinfo(&Dep, sysinfofile)) {
+        XPUSHs(sv_2mortal(sv_setref_pv(newSVpv("", 0), bless_rpmds, Dep)));
+    }
+#else
+#endif
+
+void
+rpmgetconfdep(path = NULL)
+    char * path
+    PREINIT:
+#ifdef RPM4_4_3
+    rpmds Dep = NULL;
+#endif
+    PPCODE:
+#ifdef RPM4_4_3
+    if(!rpmdsGetconf(&Dep, path)) {
+        XPUSHs(sv_2mortal(sv_setref_pv(newSVpv("", 0), bless_rpmds, Dep)));
+    }
+#else
+#endif
+
+void
+rpmcpuinfodep(path = NULL)
+    char * path
+    PREINIT:
+#ifdef RPM4_4_3
+    rpmds Dep = NULL;
+#endif
+    PPCODE:
+#ifdef RPM4_4_3
+    if(!rpmdsCpuinfo(&Dep, path)) {
+        XPUSHs(sv_2mortal(sv_setref_pv(newSVpv("", 0), bless_rpmds, Dep)));
+    }
+#else
+#endif
+
+void
+rpmunamedep()
+    PREINIT:
+#ifdef RPM4_4_3
+    rpmds Dep = NULL;
+#endif
+    PPCODE:
+#ifdef RPM4_4_3
+    if(!rpmdsUname(&Dep, NULL)) {
+        XPUSHs(sv_2mortal(sv_setref_pv(newSVpv("", 0), bless_rpmds, Dep)));
+    }
+#else
+#endif
+
+void
+rpmpipedep(cmd, tag = 0)
+    char * cmd
+    int tag
+    PREINIT:
+#ifdef RPM4_4_3
+    rpmds Dep = NULL;
+#endif
+    PPCODE:
+#ifdef RPM4_4_3
+    if(!rpmdsPipe(&Dep, tag, cmd)) {
+        XPUSHs(sv_2mortal(sv_setref_pv(newSVpv("", 0), bless_rpmds, Dep)));
+    }
+#else
+#endif
+    
 MODULE = RPM4 	PACKAGE = RPM4::Header::Dependencies  PREFIX = Dep_
 
 void

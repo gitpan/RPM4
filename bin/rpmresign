@@ -12,13 +12,13 @@
 ##- along with this program; if not, write to the Free Software
 ##- Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #
-# $Id: rpmresign 36 2005-10-04 04:08:46Z nanardon $
+# $Id: rpmresign 41 2005-10-08 17:30:58Z nanardon $
 
 use strict;
 use warnings;
 
 use Getopt::Long;
-use Hdlist::Sign;
+use RPM4::Sign;
 
 my ($configfile, $batch, $sigtype, $passfile, $macrofile, $fastmode, $path, $name, $keyid, $pass);
 my @defines;
@@ -35,7 +35,7 @@ GetOptions(
 );
 
 foreach (@defines) {
-    Hdlist::add_macro($_);
+    RPM4::add_macro($_);
 }
 
 if (!$passfile) {
@@ -43,7 +43,7 @@ if (!$passfile) {
     chomp($pass);
 }
 
-my $sign = Hdlist::Sign->new(
+my $sign = RPM4::Sign->new(
     passphrase => $pass,
     _signature => $sigtype,
     path => $path,

@@ -1,8 +1,9 @@
-/* $Id: RPM4.h 36 2005-10-04 04:08:46Z nanardon $ */
+/* $Id: RPM4.h 52 2005-12-14 16:59:57Z nanardon $ */
 
 #ifndef _HDLIST_H
 #define _HDLIST_H
 
+#include "rpmversion.h"
 #include "header.h"
 
 /* Hdlistsign.c: imported but modified functions */

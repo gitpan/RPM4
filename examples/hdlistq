@@ -16,10 +16,10 @@
 ##- along with this program; if not, write to the Free Software
 ##- Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
-# $Id: hdlistq 36 2005-10-04 04:08:46Z nanardon $
+# $Id: hdlistq 42 2005-10-08 17:31:44Z nanardon $
 
 use strict;
-use Hdlist;
+use RPM4;
 use Getopt::Long;
 
 my $qf = "%{NAME}-%{VERSION}-%{RELEASE}.%{ARCH}\n";
@@ -45,7 +45,7 @@ Description :\n%{DESCRIPTION}
 my ($type, $name, $flag, $ENV, $dep);
 if ($cond) {
     my @d = split(/ +/, $cond);
-    $dep = Hdlist::newdep(@d);
+    $dep = RPM4::newdep(@d);
 }
 
 ($go_res && @ARGV) or die 
