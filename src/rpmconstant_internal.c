@@ -1,5 +1,5 @@
 /* Nanar <nanardon@mandrake.org>
- * $Id: rpmconstant_internal.c 1 2005-07-07 10:14:03Z nanardon $
+ * $Id: rpmconstant_internal.c 73 2005-12-19 00:39:07Z nanardon $
  */
 
 #include <string.h>

@@ -14,7 +14,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA. */
 
-/* $Id: RPM4.xs 59 2005-12-17 13:50:38Z nanardon $ */
+/* $Id: RPM4.xs 69 2005-12-19 00:22:37Z nanardon $ */
 
 /* PREPROSSEUR FLAGS
  * HHACK: if defined, activate some functions or behaviour for expert user who

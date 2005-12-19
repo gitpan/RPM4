@@ -1,4 +1,4 @@
-# $Id: Makefile.PL 50 2005-12-14 15:48:56Z nanardon $
+# $Id: Makefile.PL 75 2005-12-19 12:10:37Z nanardon $
 
 # use 5.008;
 use ExtUtils::MakeMaker;
@@ -14,7 +14,10 @@ BARF
 
 sub MY::postamble {
     <<MAKECHANGELOG;
-.PHONY: ChangeLog
+.PHONY: ChangeLog copyrpmconstant
+
+copyrpmconstant:
+	make -C src copyrpmconstant
 
 ChangeLog:
 	LC_ALL=C svn update && LC_ALL=C svn log --verbose > \$@
@@ -29,4 +32,5 @@ WriteMakefile(
     VERSION_FROM => 'lib/RPM4.pm',
     DIR          => [ 'src' ],
     'EXE_FILES'  => [ qw(bin/rpm_produced bin/rpmresign bin/hrpmreb) ],
+    depend => { dist => 'copyrpmconstant' },
 );

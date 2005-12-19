@@ -16,7 +16,7 @@
 ##- along with this program; if not, write to the Free Software
 ##- Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
-# $Id: specwillbuild 42 2005-10-08 17:31:44Z nanardon $
+# $Id: specwillbuild 69 2005-12-19 00:22:37Z nanardon $
 
 use strict;
 use RPM4;

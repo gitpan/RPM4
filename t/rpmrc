@@ -1,7 +1,7 @@
 #/*! \page config_rpmrc Default configuration: /usr/lib/rpm/rpmrc
 # \verbatim
 #
-# $Id: rpmrc 36 2005-10-04 04:08:46Z nanardon $
+# $Id: rpmrc 69 2005-12-19 00:22:37Z nanardon $
 #
 # This is a global RPM configuration file. All changes made here will
 # be lost when the rpm package is upgraded. Any per-system configuration

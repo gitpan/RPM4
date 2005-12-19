@@ -14,7 +14,7 @@
 ##- along with this program; if not, write to the Free Software
 ##- Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #
-# $Id: RPM4.pm 60 2005-12-17 15:17:10Z nanardon $
+# $Id: RPM4.pm 71 2005-12-19 00:28:07Z nanardon $
 
 package RPM4;
 
@@ -30,7 +30,7 @@ use RPM4::Header::Dependencies;
 use RPM4::Header::Files;
 use RPM4::Spec;
 
-our $VERSION = '0.10';
+our $VERSION = '0.11';
 our @ISA = qw(DynaLoader Exporter);
 our @EXPORT = qw(moduleinfo
                  readconfig querytag tagName tagValue expand rpmvercmp

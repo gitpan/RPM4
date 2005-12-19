@@ -14,7 +14,7 @@
 ##- along with this program; if not, write to the Free Software
 ##- Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #
-# $Id: Header.pm 45 2005-10-19 05:39:18Z nanardon $
+# $Id: Header.pm 69 2005-12-19 00:22:37Z nanardon $
 
 package RPM4::Header;
 
