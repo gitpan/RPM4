@@ -1,5 +1,5 @@
-/* Nanar <nanardon@mandrake.org>
- * $Id: rpmconstant.h 73 2005-12-19 00:39:07Z nanardon $
+/* Nanar <nanardon@zarb.org>
+ * $Id: rpmconstant.h 79 2005-12-20 01:35:08Z nanardon $
  */
 
 #ifndef H_RPMCONSTANT

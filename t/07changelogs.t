@@ -1,4 +1,4 @@
-# $Id: 07changelogs.t 69 2005-12-19 00:22:37Z nanardon $
+# $Id: 07changelogs.t 36 2005-10-04 04:08:46Z nanardon $
 
 use strict;
 use Test::More tests => 1;

@@ -1,6 +1,6 @@
 RPM4
 
-# $Id: passphrase 69 2005-12-19 00:22:37Z nanardon $
+# $Id: passphrase 36 2005-10-04 04:08:46Z nanardon $
 # This is key passphrase, this key is here only for testing.
 # Do not use it for signing/crypting.
 # Do not trust it.

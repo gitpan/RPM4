@@ -1,4 +1,4 @@
-# $Id: 07dep.t 69 2005-12-19 00:22:37Z nanardon $
+# $Id: 07dep.t 59 2005-12-17 13:50:38Z nanardon $
 
 use strict;
 use Test::More tests => 47;

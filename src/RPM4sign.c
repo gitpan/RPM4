@@ -1,4 +1,4 @@
-/* $Id: RPM4sign.c 69 2005-12-19 00:22:37Z nanardon $ */
+/* $Id: RPM4sign.c 36 2005-10-04 04:08:46Z nanardon $ */
 
 #include "EXTERN.h"
 #include "perl.h"

@@ -1,4 +1,4 @@
-# $Id: Makefile.PL 75 2005-12-19 12:10:37Z nanardon $
+# $Id: Makefile.PL 100 2006-06-10 18:19:40Z nanardon $
 
 # use 5.008;
 use ExtUtils::MakeMaker;
@@ -9,7 +9,7 @@ my $rpm_version = `rpm --version`;
 $rpm_version =~ s/RPM version //;
 $rpm_version =~ /^(?:[5-9]|\d{2}|4\.[2-9])/
     or die <<BARF;
-Unable to build Hdlist with too old (or undetected) rpm version $rpm_version
+Unable to build RPM4 with too old (or undetected) rpm version $rpm_version
 BARF
 
 sub MY::postamble {
@@ -33,4 +33,12 @@ WriteMakefile(
     DIR          => [ 'src' ],
     'EXE_FILES'  => [ qw(bin/rpm_produced bin/rpmresign bin/hrpmreb) ],
     depend => { dist => 'copyrpmconstant' },
+    PREREQ_PM => {
+        Carp => 0,
+        'Digest::SHA1' => 0,
+        DynaLoader => 0,
+        Exporter => 0,
+        'File::Temp' => 0,
+        'MDV::Packdrakeng' => 0,
+    },
 );

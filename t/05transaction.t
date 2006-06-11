@@ -1,4 +1,4 @@
-# $Id: 05transaction.t 69 2005-12-19 00:22:37Z nanardon $
+# $Id: 05transaction.t 104 2006-06-11 02:41:50Z nanardon $
 
 use strict;
 use Test::More tests => 50;
@@ -13,13 +13,12 @@ RPM4::add_macro("_dbpath /dev/null");
 ok(RPM4::rpmdbverify() != 0, "Verify non existing database (get error)");
 
 my $tempdir = tempdir();
-rmtree($tempdir) if $tempdir;
 my $testdir = "$tempdir/testdb";
-mkdir $testdir;
+mkdir $testdir || die $!;
 
 RPM4::add_macro("_dbpath $testdir");
 
-ok(RPM4::rpmdbinit() == 0, "initdb works");
+ok(RPM4::rpmdbinit() == 0 || -f "$testdir/Packages", "initdb works");
 ok(RPM4::rpmdbrebuild() == 0, "rebuild database");
 ok(RPM4::rpmdbverify() == 0, "Verify empty");
 

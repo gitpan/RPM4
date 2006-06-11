@@ -1,4 +1,4 @@
-##- Nanar <nanardon@mandrake.org>
+##- Nanar <nanardon@zarb.org>
 ##-
 ##- This program is free software; you can redistribute it and/or modify
 ##- it under the terms of the GNU General Public License as published by
@@ -14,9 +14,12 @@
 ##- along with this program; if not, write to the Free Software
 ##- Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #
-# $Id: Dependencies.pm 69 2005-12-19 00:22:37Z nanardon $
+# $Id: Dependencies.pm 86 2005-12-22 20:01:59Z nanardon $
 
 package RPM4::Header::Dependencies;
+
+use strict;
+use warnings;
 
 sub new {
     my ($class, $deptag, $initdep, @depdesc) = @_;

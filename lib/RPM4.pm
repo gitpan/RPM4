@@ -1,4 +1,4 @@
-##- Nanar <nanardon@mandrake.org>
+##- Nanar <nanardon@zarb.org>
 ##-
 ##- This program is free software; you can redistribute it and/or modify
 ##- it under the terms of the GNU General Public License as published by
@@ -14,7 +14,7 @@
 ##- along with this program; if not, write to the Free Software
 ##- Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #
-# $Id: RPM4.pm 71 2005-12-19 00:28:07Z nanardon $
+# $Id: RPM4.pm 95 2006-01-30 22:34:00Z nanardon $
 
 package RPM4;
 
@@ -30,14 +30,14 @@ use RPM4::Header::Dependencies;
 use RPM4::Header::Files;
 use RPM4::Spec;
 
-our $VERSION = '0.11';
+our $VERSION = '0.20';
 our @ISA = qw(DynaLoader Exporter);
 our @EXPORT = qw(moduleinfo
                  readconfig querytag tagName tagValue expand rpmvercmp
                  stream2header rpm2header
                  installsrpm
                  setverbosity setlogcallback format_rpmpb
-                 rpmresign 
+                 rpmresign dumpmacros dumprc
                  newdb parserpms);
 our %EXPORT_TAGS = (
     rpmlib => [qw(getosname getarchname dumprc dumpmacros rpmvercmp setverbosity setlogcallback

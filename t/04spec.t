@@ -1,4 +1,4 @@
-# $Id: 04spec.t 69 2005-12-19 00:22:37Z nanardon $
+# $Id: 04spec.t 20 2005-07-09 23:52:17Z nanardon $
 
 use strict;
 use Test::More tests => 23;

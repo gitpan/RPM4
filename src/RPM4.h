@@ -1,4 +1,4 @@
-/* $Id: RPM4.h 69 2005-12-19 00:22:37Z nanardon $ */
+/* $Id: RPM4.h 52 2005-12-14 16:59:57Z nanardon $ */
 
 #ifndef _HDLIST_H
 #define _HDLIST_H

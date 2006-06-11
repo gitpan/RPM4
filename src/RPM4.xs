@@ -1,4 +1,4 @@
-/* Nanar <nanardon@mandrake.org>
+/* Nanar <nanardon@zarb.org>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,7 +14,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA. */
 
-/* $Id: RPM4.xs 69 2005-12-19 00:22:37Z nanardon $ */
+/* $Id: RPM4.xs 105 2006-06-11 02:58:14Z nanardon $ */
 
 /* PREPROSSEUR FLAGS
  * HHACK: if defined, activate some functions or behaviour for expert user who
@@ -64,13 +64,18 @@
      #define HD_HEADER_INTERNAL
 #endif
 
+#include "rpmversion.h"
+#ifdef RPM4_4_6
+    #define _RPMPS_INTERNAL
+#endif
+
 #include <rpm/header.h>
 #include <rpm/rpmio.h>
 #include <rpm/rpmdb.h>
+#include <rpm/rpmds.h>
 #include <rpm/rpmts.h>
 #include <rpm/rpmte.h>
 #include <rpm/rpmps.h>
-#include <rpm/rpmds.h>
 #include <rpm/rpmfi.h>
 #include <rpm/rpmpgp.h>
 #include <rpm/misc.h>
@@ -171,10 +176,21 @@ static rpmTag sv2dbquerytag(SV * sv_tag) {
 /* This function replace the standard rpmShowProgress callback
  * during transaction to allow perl callback */
 
-void * transCallback(const void *h,
+#ifdef RPM4_4_5
+#define RPM_CALLBACK_AMOUNT_TYPE unsigned long long
+#else
+#define RPM_CALLBACK_AMOUNT_TYPE unsigned long
+#endif
+
+#ifdef RPM4_4_5
+rpmCallbackFunction
+#else
+void *
+#endif 
+    transCallback(const void *h,
        const rpmCallbackType what,
-       const unsigned long amount,
-       const unsigned long total,
+       const RPM_CALLBACK_AMOUNT_TYPE amount,
+       const RPM_CALLBACK_AMOUNT_TYPE total,
        const void * pkgKey,
        void * data) {
     
@@ -406,6 +422,7 @@ void _newspec(rpmts ts, char * filename, SV * svpassphrase, SV * svrootdir, SV *
     char * cookies = NULL;
     int anyarch = 0;
     int force = 0;
+    dSP;
 
     if (svpassphrase && SvOK(svpassphrase))
         passphrase = SvPV_nolen(svpassphrase);
@@ -424,7 +441,6 @@ void _newspec(rpmts ts, char * filename, SV * svpassphrase, SV * svrootdir, SV *
     if (svforce && SvOK(svforce))
 	force = SvIV(svforce);
     
-    dSP;
     if (filename) {
         if (!parseSpec(ts, filename, rootdir, NULL, 0, passphrase, cookies, anyarch, force))
             spec = rpmtsSetSpec(ts, NULL);
@@ -1018,8 +1034,8 @@ Header_addtag(h, sv_tag, sv_tagtype, ...)
         RETVAL = 1;
     else
         RETVAL = 0;
-    if (tag == RPMTAG_OLDFILENAMES)
-        expandFilelist(h);
+    /* if (tag == RPMTAG_OLDFILENAMES)
+        expandFilelist(h); */
     for (i = 3; (i < items) && RETVAL; i++) {
         switch (tagtype) {
             case RPM_CHAR_TYPE:
@@ -1043,9 +1059,9 @@ Header_addtag(h, sv_tag, sv_tagtype, ...)
                 break;
         }
     }
-    if (tag == RPMTAG_OLDFILENAMES) {
-        compressFilelist(h);
-    }
+    /* if (tag == RPMTAG_OLDFILENAMES) {
+        compressFilelist(h); 
+    } */
     OUTPUT:
     RETVAL
     
@@ -1201,14 +1217,14 @@ Header_fullname(h)
                     name,
                     version,
                     release,
-                    headerIsEntry(h, RPMTAG_SOURCEPACKAGE) ? "src" : arch
+                    headerIsEntry(h, RPMTAG_SOURCERPM) ? arch : "src"
                     )));
         } else if (gimme == G_ARRAY) {
             EXTEND(SP, 4);
             PUSHs(sv_2mortal(newSVpv(name, 0)));
             PUSHs(sv_2mortal(newSVpv(version, 0)));
             PUSHs(sv_2mortal(newSVpv(release, 0)));
-            if (headerIsEntry(h, RPMTAG_SOURCEPACKAGE)) {
+            if (!headerIsEntry(h, RPMTAG_SOURCERPM)) {
                 PUSHs(sv_2mortal(newSVpv("src", 0)));
             } else {
                 PUSHs(sv_2mortal(newSVpv(arch, 0)));
@@ -1230,7 +1246,7 @@ int
 Header_issrc(h)
     Header h
     CODE:
-    RETVAL = headerIsEntry(h, RPMTAG_SOURCEPACKAGE);
+    RETVAL = !headerIsEntry(h, RPMTAG_SOURCERPM);
     OUTPUT:
     RETVAL
 
@@ -1271,16 +1287,17 @@ Header_files(header, scaremem = O_SCAREMEM)
     Header header
     int scaremem
     PREINIT:
-    rpmfi Files;
-    rpmts ts = NULL; /* setting this to NULL skip path relocation
+    rpmfi Files = NULL;
+    rpmts ts = NULL;  /* NULL;  setting this to NULL skip path relocation
                        * maybe a good deal is Header::Files(header, Dep = NULL) */
     PPCODE:
 #ifdef HDLISTDEBUG
     PRINTF_CALL;
-#endif
+#endif 
     Files = rpmfiNew(ts, header, RPMTAG_BASENAMES, scaremem);
-    if ((Files = rpmfiInit(Files, 0)) != NULL && rpmfiNext(Files) >= 0) {
-        XPUSHs(sv_2mortal(sv_setref_pv(newSVpv("", 0), bless_rpmfi, Files)));
+    if (Files != NULL && (Files = rpmfiInit(Files, 0)) != NULL && rpmfiNext(Files) >= 0) {
+        SPAGAIN;
+        XPUSHs(sv_setref_pv(sv_newmortal(), bless_rpmfi, (void *)Files));
 #ifdef HDRPMMEM
         PRINTF_NEW(bless_rpmfi, Files, Files->nrefs);
 #endif
@@ -1362,7 +1379,7 @@ rpmdbinit(rootdir = NULL)
     /* rpm{db,ts}init is deprecated, we open a database with create flags
      *  and close it */
     /* 0 on success */
-    RETVAL = rpmtsOpenDB(ts, O_CREAT);
+    RETVAL = rpmtsOpenDB(ts, O_RDWR | O_CREAT);
     ts = rpmtsFree(ts);
     OUTPUT:
     RETVAL
@@ -1631,10 +1648,14 @@ Ts_transadd(ts, header, key = NULL, upgrade = 1, sv_relocation = NULL, force = 0
     int force
     PREINIT:
     rpmRelocation * relocations = NULL;
+#ifdef RPM4_4_6
+    rpmRelocation relptr = NULL;
+#endif
     HV * hv_relocation;
     HE * he_relocation;
     int i = 0;
     I32 len;
+    
     CODE:
 
     if (key != NULL)
@@ -1653,22 +1674,42 @@ Ts_transadd(ts, header, key = NULL, upgrade = 1, sv_relocation = NULL, force = 0
         if (SvTYPE(sv_relocation) == SVt_PV) {
             /* String value, assume a prefix */
             relocations = malloc(2 * sizeof(*relocations));
+#ifdef RPM4_4_6
+            relptr = relocations[0];
+            relptr->newPath = SvPV_nolen(sv_relocation);
+            relptr = relocations[1];
+            relptr->oldPath = relptr->newPath = NULL;
+#else
             relocations[0].oldPath = NULL;
             relocations[0].newPath = SvPV_nolen(sv_relocation);
             relocations[1].oldPath = relocations[1].newPath = NULL;
+#endif
         } else if (SvTYPE(SvRV(sv_relocation)) == SVt_PVHV) {
             hv_relocation = (HV*)SvRV(sv_relocation);
             hv_iterinit(hv_relocation);
             while ((he_relocation = hv_iternext(hv_relocation)) != NULL) {
                 relocations = realloc(relocations, sizeof(*relocations) * (++i));
+#ifdef RPM4_4_6
+                relptr = relocations[i-1];
+                relptr->oldPath = NULL;
+                relptr->newPath = NULL;
+                relptr->oldPath = hv_iterkey(he_relocation, &len);
+                relptr->newPath = SvPV_nolen(hv_iterval(hv_relocation, he_relocation));
+#else
                 relocations[i-1].oldPath = NULL;
                 relocations[i-1].newPath = NULL;
                 relocations[i-1].oldPath = hv_iterkey(he_relocation, &len);
                 relocations[i-1].newPath = SvPV_nolen(hv_iterval(hv_relocation, he_relocation));
+#endif
             }
             /* latest relocation is identify by NULL setting */
             relocations = realloc(relocations, sizeof(*relocations) * (++i));
+#ifdef RPM4_4_6
+            relptr = relocations[i-1];
+            relptr->oldPath = relptr->newPath = NULL;
+#else 
             relocations[i-1].oldPath = relocations[i-1].newPath = NULL;
+#endif
         } else {
             croak("latest argument is set but is not an array ref or a string");
         }
@@ -1817,7 +1858,9 @@ Ts_transrun(ts, callback, ...)
                 (void *) ((long) INSTALL_LABEL | INSTALL_HASH | INSTALL_UPGRADE));
     } else if (SvTYPE(SvRV(callback)) == SVt_PVCV) { /* ref sub */
         rpmtsSetNotifyCallback(ts,
-                transCallback, (void *) callback);
+                transCallback, 
+                (void *)
+                    callback);
     } else if (SvTYPE(SvRV(callback)) == SVt_PVAV) { /* array ref */
         install_flags = sv2constant(callback, "rpminstallinterfaceflags");
         rpmtsSetNotifyCallback(ts,
@@ -2556,7 +2599,13 @@ Files_md5(Files)
     const byte * md5;
     char * fmd5 = malloc((char) 33);
     PPCODE:
-    if ((md5 = rpmfiMD5(Files)) != NULL && *md5 != 0 /* return undef if empty */) {
+    if ((md5 = 
+#ifdef RPM4_4_6
+        rpmfiDigest(Files, NULL, NULL)
+#else
+        rpmfiMD5(Files)
+#endif
+            ) != NULL && *md5 != 0 /* return undef if empty */) {
         (void) pgpHexCvt(fmd5, md5, 16);
         XPUSHs(sv_2mortal(newSVpv(fmd5, 0)));
     }
@@ -2848,7 +2897,40 @@ Spec_sources_url(spec, is = 0)
         XPUSHs(sv_2mortal(newSVpv(dest, len)));
     }
 
-    
+void
+Spec_icon(spec)
+    Spec spec
+    PREINIT:
+    Package pkg;
+    PPCODE:
+    for (pkg = spec->packages; pkg != NULL; pkg = pkg->next) {
+        char * dest = NULL;
+        int len;
+        if (!pkg->icon)
+            continue;
+        len = strlen(pkg->icon->source);
+        dest = malloc(len);
+        memcpy(dest, pkg->icon->source, len);
+        XPUSHs(sv_2mortal(newSVpv(dest, len)));
+    }
+
+void
+Spec_icon_url(spec)
+    Spec spec
+    PREINIT:
+    Package pkg;
+    PPCODE:
+    for (pkg = spec->packages; pkg != NULL; pkg = pkg->next) {
+        char * dest = NULL;
+        int len;
+        if (!pkg->icon)
+            continue;
+        len = strlen(pkg->icon->fullSource);
+        dest = malloc(len);
+        memcpy(dest, pkg->icon->fullSource, len);
+        XPUSHs(sv_2mortal(newSVpv(dest, len)));
+    }
+
 MODULE = RPM4		PACKAGE = RPM4::Db::_Problems	PREFIX = ps_
 
 void
