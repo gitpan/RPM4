@@ -1,4 +1,109 @@
 ------------------------------------------------------------------------
+r123 | nanardon | 2007-03-01 01:11:13 +0100 (Thu, 01 Mar 2007) | 1 line
+Changed paths:
+   M /trunk/RPM4/src/RPM4.xs
+   M /trunk/RPM4/t/07files.t
+
+- fix #2, file mode is an unsigned value
+------------------------------------------------------------------------
+r122 | nanardon | 2007-03-01 00:58:00 +0100 (Thu, 01 Mar 2007) | 1 line
+Changed paths:
+   M /trunk/RPM4/src/RPM4.xs
+
+- in rpm 4.4.8 (maybe 4.4.7) scaremem should be 0
+------------------------------------------------------------------------
+r121 | nanardon | 2007-03-01 00:56:24 +0100 (Thu, 01 Mar 2007) | 1 line
+Changed paths:
+   M /trunk/RPM4/src/Makefile.PL
+
+- handle up to rpm 4.4.8
+------------------------------------------------------------------------
+r120 | nanardon | 2007-02-22 09:09:09 +0100 (Thu, 22 Feb 2007) | 1 line
+Changed paths:
+   M /trunk/RPM4/src/Makefile.PL
+
+- handle rpm 4.4.5
+------------------------------------------------------------------------
+r119 | nanardon | 2006-07-26 17:29:28 +0200 (Wed, 26 Jul 2006) | 1 line
+Changed paths:
+   M /trunk/RPM4/bin/rpm_produced
+   M /trunk/RPM4/lib/RPM4.pm
+   M /trunk/RPM4/src/RPM4.xs
+
+- remove _ from some function for coherency (guillomovitch)
+------------------------------------------------------------------------
+r118 | nanardon | 2006-07-24 20:29:52 +0200 (Mon, 24 Jul 2006) | 1 line
+Changed paths:
+   M /trunk/RPM4/lib/RPM4.pm
+
+- fix doc
+------------------------------------------------------------------------
+r117 | nanardon | 2006-07-09 13:17:56 +0200 (Sun, 09 Jul 2006) | 1 line
+Changed paths:
+   M /trunk/RPM4/lib/RPM4/Sign.pm
+
+- allow to set passphrase in new()
+------------------------------------------------------------------------
+r116 | nanardon | 2006-07-09 12:49:27 +0200 (Sun, 09 Jul 2006) | 1 line
+Changed paths:
+   M /trunk/RPM4/lib/RPM4/Sign.pm
+
+- document RPM4::Sign
+------------------------------------------------------------------------
+r115 | nanardon | 2006-07-09 11:32:08 +0200 (Sun, 09 Jul 2006) | 1 line
+Changed paths:
+   M /trunk/RPM4/lib/RPM4/Header.pm
+
+- documente Header::{files, dep}
+------------------------------------------------------------------------
+r114 | nanardon | 2006-07-09 02:09:06 +0200 (Sun, 09 Jul 2006) | 1 line
+Changed paths:
+   M /trunk/RPM4/lib/RPM4/Header/Dependencies.pm
+
+- remove print()
+------------------------------------------------------------------------
+r113 | nanardon | 2006-06-27 17:42:41 +0200 (Tue, 27 Jun 2006) | 1 line
+Changed paths:
+   M /trunk/RPM4/src/RPM4.xs
+
+- revert previous commit not wanted
+------------------------------------------------------------------------
+r112 | nanardon | 2006-06-27 17:40:12 +0200 (Tue, 27 Jun 2006) | 3 lines
+Changed paths:
+   M /trunk/RPM4/bin/rpmresign
+   M /trunk/RPM4/src/RPM4.xs
+
+- clean up
+- can set passphrase into env var
+- add pod doc
+------------------------------------------------------------------------
+r111 | nanardon | 2006-06-21 16:57:35 +0200 (Wed, 21 Jun 2006) | 1 line
+Changed paths:
+   M /trunk/RPM4/t/07files.t
+
+- update test because of rpm rebuild
+------------------------------------------------------------------------
+r110 | nanardon | 2006-06-21 16:54:50 +0200 (Wed, 21 Jun 2006) | 1 line
+Changed paths:
+   M /trunk/RPM4/t/04spec.t
+
+- add test for URL
+------------------------------------------------------------------------
+r109 | nanardon | 2006-06-21 16:47:24 +0200 (Wed, 21 Jun 2006) | 1 line
+Changed paths:
+   M /trunk/RPM4/t/02header.t
+   M /trunk/RPM4/t/test-rpm-1.0-1mdk.noarch.rpm
+   M /trunk/RPM4/t/test-rpm-1.0-1mdk.src.rpm
+   M /trunk/RPM4/t/test-rpm.spec
+
+- add test on ->tag('url')
+------------------------------------------------------------------------
+r108 | nanardon | 2006-06-11 15:25:17 +0200 (Sun, 11 Jun 2006) | 1 line
+Changed paths:
+   M /trunk/RPM4/lib/RPM4.pm
+
+- next version will be 0.21
+------------------------------------------------------------------------
 r106 | nanardon | 2006-06-11 15:14:56 +0200 (Sun, 11 Jun 2006) | 1 line
 Changed paths:
    M /trunk/RPM4/MANIFEST

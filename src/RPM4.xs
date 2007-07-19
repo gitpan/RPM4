@@ -14,7 +14,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA. */
 
-/* $Id: RPM4.xs 105 2006-06-11 02:58:14Z nanardon $ */
+/* $Id: RPM4.xs 131 2007-07-15 23:29:31Z nanardon $ */
 
 /* PREPROSSEUR FLAGS
  * HHACK: if defined, activate some functions or behaviour for expert user who
@@ -34,8 +34,8 @@
 #undef Stat
 
 /* copy data into rpm or use the header */
-#define O_SCAREMEM 1 /* If returning perl object */
-#define SCAREMEM 1
+#define O_SCAREMEM 0 /* If returning perl object */
+#define SCAREMEM 0
 
 /* Pre processor flags for debugging purpose */
 
@@ -415,13 +415,14 @@ void _newdep(SV * sv_deptag, char * name, SV * sv_sense, SV * sv_evr) {
 }
 
 /* Get a new specfile */
-void _newspec(rpmts ts, char * filename, SV * svpassphrase, SV * svrootdir, SV * svcookies, SV * svanyarch, SV * svforce) {
+void _newspec(rpmts ts, char * filename, SV * svpassphrase, SV * svrootdir, SV * svcookies, SV * svanyarch, SV * svforce, SV * svverify) {
     Spec spec = NULL;
     char * passphrase = NULL;
     char * rootdir = NULL;
     char * cookies = NULL;
     int anyarch = 0;
     int force = 0;
+    int verify = 0;
     dSP;
 
     if (svpassphrase && SvOK(svpassphrase))
@@ -441,8 +442,11 @@ void _newspec(rpmts ts, char * filename, SV * svpassphrase, SV * svrootdir, SV *
     if (svforce && SvOK(svforce))
 	force = SvIV(svforce);
     
+    if (svverify && SvOK(svverify))
+	verify = SvIV(svverify);
+    
     if (filename) {
-        if (!parseSpec(ts, filename, rootdir, NULL, 0, passphrase, cookies, anyarch, force))
+        if (!parseSpec(ts, filename, rootdir, 0, passphrase, cookies, anyarch, force, verify))
             spec = rpmtsSetSpec(ts, NULL);
 #ifdef HHACK
     } else {
@@ -720,13 +724,13 @@ expandnumeric(name)
     XPUSHs(sv_2mortal(newSViv(value)));
     
 void
-add_macro(macro)
+addmacro(macro)
     char * macro
     CODE:
     rpmDefineMacro(NULL, macro, RMIL_DEFAULT);
 
 void
-del_macro(name)
+delmacro(name)
     char * name
     CODE:
     delMacro(NULL, name);
@@ -787,6 +791,20 @@ archscore(arch, build = 0)
     OUTPUT:
     RETVAL
     
+int
+platformscore(platform)
+    const char * platform
+    PREINIT:
+    CODE:
+#ifdef RPM4_4_8
+    RETVAL=rpmPlatformScore(platform, NULL, 0);
+#else
+    RETVAL=0;
+    croak("platformscore exists only from rpm 4.4.8");
+#endif
+    OUTPUT:
+    RETVAL
+
 void
 buildhost()
     PPCODE:
@@ -976,21 +994,15 @@ Header_string(h, no_header_magic = 0)
     int no_header_magic
     PREINIT:
     char * string = NULL;
-    int offset = 0;
+    int offset = 8; /* header magic length */
     void * ptr = NULL;
     int hsize = 0;
     PPCODE:
-    ptr = headerUnload(h);
-    hsize = headerSizeof(h, no_header_magic ? HEADER_MAGIC_NO : HEADER_MAGIC_YES);
-    string = malloc(hsize);
-    if (!no_header_magic) {
-        memcpy(string, header_magic, sizeof(header_magic));
-        offset = sizeof(header_magic);
-    }
-    memcpy(string + offset, ptr, headerSizeof(h, HEADER_MAGIC_NO));
-    PUSHs(sv_2mortal(newSVpv((char *)string, hsize)));
-    free(ptr);
-
+    string = headerUnload(h);
+    hsize = headerSizeof((Header) string, no_header_magic ? HEADER_MAGIC_NO : HEADER_MAGIC_YES);
+    ptr = string + (no_header_magic ? offset : 0);
+    PUSHs(sv_2mortal(newSVpv((char *)ptr, hsize)));
+    free(string);
 
 int
 Header_removetag(h, sv_tag)
@@ -1186,14 +1198,7 @@ Header_queryformat(h, query)
     PPCODE:
     s = headerSprintf(h, query,
             rpmTagTable, rpmHeaderFormats, NULL);
-    if (s) {
-        char * cs = NULL;
-        int len = strlen(s);
-        
-        cs = malloc(strlen(s)); /* TODO need to check return of malloc */
-        memcpy(cs, s, len);
-        XPUSHs(sv_2mortal(newSVpv(cs, len)));
-    }
+    XPUSHs(sv_2mortal(newSVpv(s, 0)));
     _free(s);
 
 void
@@ -1271,7 +1276,13 @@ Header_dep(header, type, scaremem = O_SCAREMEM)
     rpmTag tag;
     PPCODE:
     tag = sv2deptag(type);
-    ds = rpmdsNew(header, tag, scaremem);
+    ds = rpmdsNew(header, tag,
+#ifdef RPM4_4_7
+        0
+#else
+        scaremem
+#endif
+    );
     ds = rpmdsInit(ds);
     if (ds != NULL)
         if (rpmdsNext(ds) >= 0) {
@@ -2590,7 +2601,7 @@ void
 Files_mode(Files)
     rpmfi Files
     PPCODE:
-    XPUSHs(sv_2mortal(newSViv(rpmfiFMode(Files))));
+    XPUSHs(sv_2mortal(newSVuv(rpmfiFMode(Files))));
 
 void
 Files_md5(Files)
@@ -2681,18 +2692,19 @@ Files_nlink(Files)
 MODULE = RPM4     PACKAGE = RPM4
 
 void
-newspec(filename = NULL, passphrase = NULL, rootdir = NULL, cookies = NULL, anyarch = NULL, force = NULL)
+newspec(filename = NULL, passphrase = NULL, rootdir = NULL, cookies = NULL, anyarch = NULL, force = NULL, verify = NULL)
     char * filename 
     SV * passphrase
     SV * rootdir
     SV * cookies
     SV * anyarch
     SV * force
+    SV * verify
     PREINIT:
     rpmts ts = rpmtsCreate();
     PPCODE:
     PUTBACK;
-    _newspec(ts, filename, passphrase, rootdir, cookies, anyarch, force);
+    _newspec(ts, filename, passphrase, rootdir, cookies, anyarch, force, verify);
     ts = rpmtsFree(ts);
     SPAGAIN;
 
@@ -2709,6 +2721,7 @@ Spec_new(perlclass, specfile = NULL, ...)
     SV * cookies = NULL;
     SV * anyarch = 0;
     SV * force = 0;
+    SV * verify = 0;
     int i;
     PPCODE:
     for(i=2; i < items; i++) {
@@ -2724,6 +2737,9 @@ Spec_new(perlclass, specfile = NULL, ...)
         } else if (strcmp(SvPV_nolen(ST(i)), "force") == 0) {
             i++;
             force = ST(i);
+        } else if (strcmp(SvPV_nolen(ST(i)), "verify") == 0) {
+            i++;
+            verify = ST(i);
         } else if (strcmp(SvPV_nolen(ST(i)), "anyarch") == 0) {
             i++;
             anyarch = ST(i);
@@ -2741,7 +2757,7 @@ Spec_new(perlclass, specfile = NULL, ...)
     if (!ts)
         ts = rpmtsCreate();
     PUTBACK;
-    _newspec(ts, specfile, passphrase, rootdir, cookies, anyarch, force);
+    _newspec(ts, specfile, passphrase, rootdir, cookies, anyarch, force, verify);
     SPAGAIN;
     ts = rpmtsFree(ts);
     
@@ -2869,14 +2885,8 @@ Spec_sources(spec, is = 0)
     struct Source *srcPtr;
     PPCODE:
     for (srcPtr = spec->sources; srcPtr != NULL; srcPtr = srcPtr->next) {
-        char * dest = NULL;
-        int len;
         if (is && !(srcPtr->flags & is))
-            continue;
-        len = strlen(srcPtr->source);
-        dest = malloc(len);
-        memcpy(dest, srcPtr->source, len);
-        XPUSHs(sv_2mortal(newSVpv(dest, len)));
+        XPUSHs(sv_2mortal(newSVpv(srcPtr->source, 0)));
     }
 
 void
@@ -2887,14 +2897,9 @@ Spec_sources_url(spec, is = 0)
     struct Source * srcPtr;
     PPCODE:
     for (srcPtr = spec->sources; srcPtr != NULL; srcPtr = srcPtr->next) {
-        char * dest = NULL;
-        int len;
         if (is && !(srcPtr->flags & is))
             continue;
-        len = strlen(srcPtr->fullSource);
-        dest = malloc(len);
-        memcpy(dest, srcPtr->fullSource, len);
-        XPUSHs(sv_2mortal(newSVpv(dest, len)));
+        XPUSHs(sv_2mortal(newSVpv(srcPtr->fullSource, 0)));
     }
 
 void

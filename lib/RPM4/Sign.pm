@@ -10,7 +10,7 @@
 ##- along with this program; if not, write to the Free Software
 ##- Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #
-# $Id: Sign.pm 66 2005-12-19 00:06:46Z nanardon $
+# $Id: Sign.pm 124 2007-03-07 21:26:14Z nanardon $
 
 package RPM4::Sign;
 
@@ -28,6 +28,7 @@ sub new {
         name => undef,
         path => undef,
         checkrpms => 1,
+        passphrase => undef,
 
         password_file => undef,
 
@@ -149,3 +150,62 @@ sub rpmssign {
 }
 
 1;
+
+__END__
+
+=head1 NAME
+
+RPM4::Sign
+
+=head1 SYNOPSIS
+
+A container to massively resign packages
+
+=head1 DESCRIPTION
+
+This object retains gpg options and provides functions to easilly sign or
+resign packages. It does not resign packages having already the proper
+signature.
+
+=head1 METHODS
+
+=head2 new(%options)
+
+Create a new RPM4::Sign object.
+
+Options are:
+
+=over 4
+
+=item name
+
+The gpg key identity to use
+
+=item path
+
+the gpg homedir where keys are located
+
+=item password_file
+
+Use passphrase contains in this files
+
+=item passphrase
+
+Use this passphrase to unlock the key
+
+=item checkrpms
+
+Set to 0 remove the signature checking on packages
+
+=back
+
+=head2 rpmssign(@filelist)
+
+Sign or resign the packages passed are arguments
+
+=head1 SEE ALSO
+
+L<RPM4>
+L<RPM4::Header>
+
+=cut

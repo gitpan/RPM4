@@ -1,7 +1,7 @@
-# $Id: 07files.t 36 2005-10-04 04:08:46Z nanardon $
+# $Id: 07files.t 123 2007-03-01 00:11:13Z nanardon $
 
 use strict;
-use Test::More tests => 10;
+use Test::More tests => 11;
 use FindBin qw($Bin);
 use RPM4;
 
@@ -30,8 +30,9 @@ ok(defined($files->basename()), "Can get Files::basename()");
 ok(defined($files->fflags()), "Can get Files::fflags()");
 is(
     $files->md5(),
-    "b9cb4e3dc1b8007e5c9678d1acecac47",
+    "6e5e49d3e3743eb3d5737ce8aca1fb02",
     "md5 is OK"
 );
 ok(!defined($files->link()), "Can get Files::link()");
 ok(defined($files->mode()), "Can get Files::mode()");
+ok($files->mode() > 0, "Files::mode() is positive value");

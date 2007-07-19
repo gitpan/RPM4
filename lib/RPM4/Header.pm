@@ -14,7 +14,7 @@
 ##- along with this program; if not, write to the Free Software
 ##- Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #
-# $Id: Header.pm 79 2005-12-20 01:35:08Z nanardon $
+# $Id: Header.pm 115 2006-07-09 09:32:08Z nanardon $
 
 package RPM4::Header;
 
@@ -329,6 +329,16 @@ Returns true if package is a source package.
 
 Compare the header to another, return 1 if the object is higher, -1 if
 header passed as argument is better, 0 if update is not possible.
+
+=head2 dep($deptype)
+
+Return a RPM4::Header::Dependencies object containing dependencies of type
+$deptype found in the header.
+
+=head2 files()
+
+Return a RPM4::Header::Files object containing the set of files include in
+the rpm.
 
 =head1 SEE ALSO
 

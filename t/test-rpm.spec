@@ -1,4 +1,4 @@
-# $Id: test-rpm.spec 36 2005-10-04 04:08:46Z nanardon $
+# $Id: test-rpm.spec 109 2006-06-21 14:47:24Z nanardon $
 Summary: test rpm for perl-URPM test suite
 BuildArch: noarch
 Name: test-rpm
@@ -7,6 +7,7 @@ Release: 1mdk
 License: GPL
 Group: Application/Development
 BuildRoot: %{_tmppath}/%{name}-root
+Url: http://rpm4.zarb.org/
 
 %description
 test rpm

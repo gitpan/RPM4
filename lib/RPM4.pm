@@ -14,7 +14,7 @@
 ##- along with this program; if not, write to the Free Software
 ##- Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #
-# $Id: RPM4.pm 95 2006-01-30 22:34:00Z nanardon $
+# $Id: RPM4.pm 119 2006-07-26 15:29:28Z nanardon $
 
 package RPM4;
 
@@ -30,7 +30,7 @@ use RPM4::Header::Dependencies;
 use RPM4::Header::Files;
 use RPM4::Spec;
 
-our $VERSION = '0.20';
+our $VERSION = '0.22';
 our @ISA = qw(DynaLoader Exporter);
 our @EXPORT = qw(moduleinfo
                  readconfig querytag tagName tagValue expand rpmvercmp
@@ -180,9 +180,11 @@ sub format_rpmpb {
 # Alias for compatiblity #
 ##########################
 
-sub specnew {
-    newspec(@_);
-}
+sub specnew { newspec(@_) }
+
+sub add_macro { addmacro(@_) }
+
+sub del_macro { delmacro(@_) }
 
 1;
 
@@ -303,15 +305,15 @@ Evaluate macros contained in C<$string>, like C<rpm --eval>.
 
     expand("%_var") return "/var".
 
-=head2 add_macro("_macro value")
+=head2 addmacro("_macro value")
 
 Define a macro into rpmlib. The macro is defined for the whole script. Ex:
-C<add_macro("_macro value")>. Note that the macro name does have the prefix
+C<addmacro("_macro value")>. Note that the macro name does have the prefix
 "%", to prevent rpm from evaluating it.
 
 =head2 del_macro("_macro")
 
-Delete a macro from rpmlib. Exactly the reverse of add_macro().
+Delete a macro from rpmlib. Exactly the reverse of addmacro().
 
 =head2 loadmacrosfile($filename)
 
@@ -423,34 +425,34 @@ internals provides
 Return a RPM4::Header::Dependencies object about sysinfo file,
 $file is an optionnal file to, default depend of rpm.
 
-Since rpm 3.3.3, return undef on older version
+Since rpm 4.3.3, return undef on older version
 
 =head2 rpmgetconfdep($path)
 
 Return a RPM4::Header::Dependencies object about getconf,
 $path is an optionnal path to use, default is /.
 
-Since rpm 3.3.3, return undef on older version
+Since rpm 4.3.3, return undef on older version
 
 =head2 rpmcpuinfodep($file)
 
 Return a RPM4::Header::Dependencies object about cpuinfo,
 $file is an optionnal file to use, default is /proc/cpuinfo.
 
-Since rpm 3.3.3, return undef on older version
+Since rpm 4.3.3, return undef on older version
 
 =head2 rpmunamedep
 
 Return a RPM4::Header::Dependencies object from uname().
 
-Since rpm 3.3.3, return undef on older version
+Since rpm 4.3.3, return undef on older version
 
 =head2 rpmpipedep($cmd)
 
 Return a RPM4::Header::Dependencies from a command using.
 (It use a pipe internally). $cmd is the command to use.
 
-Since rpm 3.3.3, return undef on older version
+Since rpm 4.3.3, return undef on older version
 
 =head1 SEE ALSO
 

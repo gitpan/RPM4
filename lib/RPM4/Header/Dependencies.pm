@@ -14,7 +14,7 @@
 ##- along with this program; if not, write to the Free Software
 ##- Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #
-# $Id: Dependencies.pm 86 2005-12-22 20:01:59Z nanardon $
+# $Id: Dependencies.pm 114 2006-07-09 00:09:06Z nanardon $
 
 package RPM4::Header::Dependencies;
 
@@ -23,10 +23,8 @@ use warnings;
 
 sub new {
     my ($class, $deptag, $initdep, @depdesc) = @_;
-    print "$deptag, $initdep\n";
     my $dep = RPM4::Header::Dependencies->newsingle($deptag, @$initdep) or return;
     foreach (@depdesc) {
-        print "$_\n";
         $dep->add(@$_);
     }
     return $dep;
