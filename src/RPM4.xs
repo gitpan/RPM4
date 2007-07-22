@@ -14,7 +14,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA. */
 
-/* $Id: RPM4.xs 131 2007-07-15 23:29:31Z nanardon $ */
+/* $Id: RPM4.xs 140 2007-07-22 00:23:50Z nanardon $ */
 
 /* PREPROSSEUR FLAGS
  * HHACK: if defined, activate some functions or behaviour for expert user who
@@ -475,12 +475,14 @@ void _installsrpms(rpmts ts, char * filename) {
     const char * specfile = NULL;
     const char * cookies = NULL;
     dSP;
+    I32 gimme = GIMME_V;
     if (rpmInstallSource(
                 ts,
                 filename,
                 &specfile,
                 &cookies) == 0) { 
         XPUSHs(sv_2mortal(newSVpv(specfile, 0)));
+        if (gimme == G_ARRAY)
         XPUSHs(sv_2mortal(newSVpv(cookies, 0)));
     }
     PUTBACK;
@@ -715,6 +717,7 @@ expand(name)
     PPCODE:
     const char * value = rpmExpand(name, NULL);
     XPUSHs(sv_2mortal(newSVpv(value, 0)));
+    free(value);
 
 void
 expandnumeric(name)
@@ -807,6 +810,7 @@ platformscore(platform)
 
 void
 buildhost()
+    PREINIT:
     PPCODE:
     XPUSHs(sv_2mortal(newSVpv(buildHost(),0)));
     
@@ -995,14 +999,19 @@ Header_string(h, no_header_magic = 0)
     PREINIT:
     char * string = NULL;
     int offset = 8; /* header magic length */
-    void * ptr = NULL;
+    char * ptr = NULL;
     int hsize = 0;
     PPCODE:
+    hsize = headerSizeof(h, no_header_magic ? HEADER_MAGIC_NO : HEADER_MAGIC_YES);
     string = headerUnload(h);
-    hsize = headerSizeof((Header) string, no_header_magic ? HEADER_MAGIC_NO : HEADER_MAGIC_YES);
-    ptr = string + (no_header_magic ? offset : 0);
-    PUSHs(sv_2mortal(newSVpv((char *)ptr, hsize)));
+    if (! no_header_magic) {
+        ptr = malloc(hsize);
+        memcpy(ptr, header_magic, 8);
+        memcpy(ptr + 8, string, hsize - 8);
+    }
+    XPUSHs(sv_2mortal(newSVpv(ptr ? ptr : string, hsize)));
     free(string);
+    free(ptr);
 
 int
 Header_removetag(h, sv_tag)
@@ -2810,6 +2819,7 @@ Spec_binrpm(spec)
     Package pkg;
     const char * binFormat;
     char * binRpm;
+    char * path;
     PPCODE:
     for(pkg = spec->packages; pkg != NULL; pkg = pkg->next) {
         if (pkg->fileList == NULL)
@@ -2819,7 +2829,9 @@ Spec_binrpm(spec)
         binRpm = headerSprintf(pkg->header, binFormat, rpmTagTable,
                    rpmHeaderFormats, NULL);
         _free(binFormat);
-        XPUSHs(sv_2mortal(newSVpv(rpmGetPath("%{_rpmdir}/", binRpm, NULL), 0)));
+        path = rpmGetPath("%{_rpmdir}/", binRpm, NULL);
+        XPUSHs(sv_2mortal(newSVpv(path, 0)));
+        _free(path);
         _free(binRpm);
     }
 
@@ -2886,6 +2898,7 @@ Spec_sources(spec, is = 0)
     PPCODE:
     for (srcPtr = spec->sources; srcPtr != NULL; srcPtr = srcPtr->next) {
         if (is && !(srcPtr->flags & is))
+            continue;
         XPUSHs(sv_2mortal(newSVpv(srcPtr->source, 0)));
     }
 

@@ -1,7 +1,7 @@
-# $Id: 04spec.t 110 2006-06-21 14:54:50Z nanardon $
+# $Id: 04spec.t 140 2007-07-22 00:23:50Z nanardon $
 
 use strict;
-use Test::More tests => 24;
+use Test::More tests => 28;
 use FindBin qw($Bin);
 use File::Temp qw(tempdir);
 use RPM4;
@@ -21,6 +21,7 @@ RPM4::add_macro("_gpg_name RPM4 test key");
 RPM4::add_macro("_gpg_path $Bin/gnupg");
 
 ok((RPM4::installsrpm("$Bin/test-rpm-1.0-1mdk.src.rpm"))[0] =~ m/test-rpm\.spec$/, "installsrpms works");
+like(RPM4::installsrpm("$Bin/test-rpm-1.0-1mdk.src.rpm"), '/test-rpm\.spec$/', "installsrpms works");
 ok(!RPM4::installsrpm("$Bin/test-rpm-1.0-1mdk.noarch.rpm"), "installsrpms works");
 
 my $spec;
@@ -61,3 +62,6 @@ my ($bh) = $spec->binheader();
 ok(defined($bh), "Can get binary header from spec");
 ok($bh->queryformat("%{NAME}") eq "test-rpm", "can querying header give by spec");
 
+ok($spec = RPM4::Spec->new("$Bin/test-source.spec", force => 1), "can load spec");
+is(($spec->sources)[0], 'source.tar.gz', "can list source");
+is(($spec->sources_url)[0], 'http://rpm4.zarb.org/source.tar.gz', "can list source with url");

@@ -1,9 +1,10 @@
-# $Id: 02header.t 109 2006-06-21 14:47:24Z nanardon $
+# $Id: 02header.t 138 2007-07-21 02:00:27Z nanardon $
 
 use strict;
-use Test::More tests => 41;
+use Test::More tests => 45;
 use FindBin qw($Bin);
 use RPM4;
+use File::Temp;
 
 my $headerfile;
 
@@ -76,4 +77,16 @@ unlink($headerfile);
 ok($hdr2->tag(1000) eq 'test-rpm', "tag 1000 from header file works");
 }
 
+{
 
+my $hdr = RPM4::Header->new("$Bin/test-rpm-1.0-1mdk.noarch.rpm");
+foreach my $magic (0, 1) {
+my $string = $hdr->string($magic);
+ok($string, "can get header as string");
+my $hdl = File::Temp->new(UNLINK => 1);
+print $hdl $string;
+seek($hdl, 0, 0);
+my $hdr2 = RPM4::stream2header($hdl, $magic);
+isa_ok($hdr2, "RPM4::Header", "can reparse header from a string");
+}
+}
