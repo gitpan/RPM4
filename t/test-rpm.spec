@@ -1,4 +1,4 @@
-# $Id: test-rpm.spec 109 2006-06-21 14:47:24Z nanardon $
+# $Id$
 Summary: test rpm for perl-URPM test suite
 BuildArch: noarch
 Name: test-rpm

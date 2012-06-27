@@ -14,7 +14,7 @@
 ##- along with this program; if not, write to the Free Software
 ##- Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #
-# $Id: RPM4.pm 132 2007-07-19 22:11:23Z nanardon $
+# $Id$
 
 package RPM4;
 
@@ -30,7 +30,7 @@ use RPM4::Header::Dependencies;
 use RPM4::Header::Files;
 use RPM4::Spec;
 
-our $VERSION = '0.23';
+our $VERSION = '0.31';
 our @ISA = qw(DynaLoader Exporter);
 our @EXPORT = qw(moduleinfo
                  readconfig querytag tagName tagValue expand rpmvercmp
@@ -419,40 +419,6 @@ Returns 0 on success.
 
 Create a RPM4::Header::Dependencies object about rpmlib
 internals provides
-
-=head2 rpmsysinfodep($file)
-
-Return a RPM4::Header::Dependencies object about sysinfo file,
-$file is an optionnal file to, default depend of rpm.
-
-Since rpm 4.3.3, return undef on older version
-
-=head2 rpmgetconfdep($path)
-
-Return a RPM4::Header::Dependencies object about getconf,
-$path is an optionnal path to use, default is /.
-
-Since rpm 4.3.3, return undef on older version
-
-=head2 rpmcpuinfodep($file)
-
-Return a RPM4::Header::Dependencies object about cpuinfo,
-$file is an optionnal file to use, default is /proc/cpuinfo.
-
-Since rpm 4.3.3, return undef on older version
-
-=head2 rpmunamedep
-
-Return a RPM4::Header::Dependencies object from uname().
-
-Since rpm 4.3.3, return undef on older version
-
-=head2 rpmpipedep($cmd)
-
-Return a RPM4::Header::Dependencies from a command using.
-(It use a pipe internally). $cmd is the command to use.
-
-Since rpm 4.3.3, return undef on older version
 
 =head1 SEE ALSO
 

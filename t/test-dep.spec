@@ -1,4 +1,4 @@
-# $Id: test-dep.spec 36 2005-10-04 04:08:46Z nanardon $
+# $Id$
 Summary: test rpm dependencies for perl-URPM test suite
 BuildArch: noarch
 Name: test-dep

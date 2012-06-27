@@ -1,16 +1,27 @@
-# http://module-build.sourceforge.net/META-spec.html
-#XXXXXXX This is a prototype!!!  It will change in the future!!! XXXXX#
-name:         RPM4
-version:      0.23
-version_from: lib/RPM4.pm
-installdirs:  site
+---
+abstract: unknown
+author:
+  - unknown
+build_requires:
+  ExtUtils::MakeMaker: 0
+configure_requires:
+  ExtUtils::MakeMaker: 0
+dynamic_config: 1
+generated_by: 'ExtUtils::MakeMaker version 6.6302, CPAN::Meta::Converter version 2.120921'
+license: unknown
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: RPM4
+no_index:
+  directory:
+    - t
+    - inc
 requires:
-    Carp:                          0
-    Digest::SHA1:                  0
-    DynaLoader:                    0
-    Exporter:                      0
-    File::Temp:                    0
-    MDV::Packdrakeng:              0
-
-distribution_type: module
-generated_by: ExtUtils::MakeMaker version 6.30_01
+  Carp: 0
+  Digest::SHA1: 0
+  DynaLoader: 0
+  Exporter: 0
+  File::Temp: 0
+  MDV::Packdrakeng: 0
+version: 0.31

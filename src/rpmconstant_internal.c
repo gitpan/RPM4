@@ -1,5 +1,5 @@
 /* Nanar <nanardon@zarb.org>
- * $Id: rpmconstant_internal.c 79 2005-12-20 01:35:08Z nanardon $
+ * $Id$
  */
 
 #include <string.h>

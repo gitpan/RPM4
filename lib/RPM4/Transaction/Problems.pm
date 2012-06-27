@@ -14,7 +14,7 @@
 ##- along with this program; if not, write to the Free Software
 ##- Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #
-# $Id: Problems.pm 79 2005-12-20 01:35:08Z nanardon $
+# $Id$
 
 use strict;
 use warnings;
@@ -87,6 +87,10 @@ when trying to install or removing rpms from the system.
 
 Create a new problems collection from transaction. Return undef if now
 problems has been found in the transaction.
+
+=head2 $pbs->count
+
+Return the count of problems in the object
 
 =head2 $pbs->init
 

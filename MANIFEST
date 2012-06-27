@@ -56,4 +56,5 @@ examples/hdrpmq
 examples/specwillbuild
 examples/hdlist2sdb
 examples/hrpmreb-macros
-META.yml                                 Module meta-data (added by MakeMaker)
+META.yml                                 Module YAML meta-data (added by MakeMaker)
+META.json                                Module JSON meta-data (added by MakeMaker)

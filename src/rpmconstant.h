@@ -1,5 +1,5 @@
 /* Nanar <nanardon@zarb.org>
- * $Id: rpmconstant.h 79 2005-12-20 01:35:08Z nanardon $
+ * $Id$
  */
 
 #ifndef H_RPMCONSTANT
@@ -32,7 +32,6 @@
 #include <rpm/rpmds.h>
 #include <rpm/rpmfi.h>
 #include <rpm/rpmpgp.h>
-#include <rpm/misc.h>
 #include <rpm/rpmbuild.h>
 #include <rpm/rpmlib.h>
 

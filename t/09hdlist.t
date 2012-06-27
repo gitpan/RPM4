@@ -1,4 +1,4 @@
-# $Id: 09hdlist.t 36 2005-10-04 04:08:46Z nanardon $
+# $Id$
 
 use strict;
 use Test::More tests => 6;

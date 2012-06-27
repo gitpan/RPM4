@@ -1,7 +1,7 @@
-# $Id: 07dep.t 124 2007-03-07 21:26:14Z nanardon $
+# $Id$
 
 use strict;
-use Test::More tests => 47;
+use Test::More tests => 43;
 use FindBin qw($Bin);
 use RPM4;
 use RPM4::Header::Dependencies;
@@ -13,41 +13,6 @@ isa_ok(
     'RPM4::Header::Dependencies',
     "Can get a dep for rpmlib"
 );
-
-SKIP: {
-    if ($minfo{RPMVERSION} lt '4.4.3') {
-        skip(
-            "These function are supported only for rpm 4.4.3 or highter", 
-            4
-        );
-    }
-    
-    ok(1); # TODO NEED review
-    #isa_ok(
-    #    RPM4::rpmsysinfodep(),
-    #    'RPM4::Header::Dependencies',
-    #    "Can get a dep for sysinfo"
-    #);
-
-    isa_ok(
-        RPM4::rpmgetconfdep(),
-        'RPM4::Header::Dependencies',
-        "Can get a dep for getconf"
-    );
-    
-    ok(1); # TODO NEED review on ppc
-    #isa_ok(
-    #    RPM4::rpmcpuinfodep(),
-    #    'RPM4::Header::Dependencies',
-    #    "Can get a dep for cpuinfo"
-    #);
-
-    isa_ok(
-        RPM4::rpmunamedep(),
-        'RPM4::Header::Dependencies',
-        "Can get a dep for cpuinfo"
-    );
-}
 
 my $htest = RPM4::Header->new("$Bin/test-rpm-1.0-1mdk.noarch.rpm");
 my $hdep = RPM4::Header->new("$Bin/test-dep-1.0-1mdk.noarch.rpm");

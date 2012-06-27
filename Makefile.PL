@@ -1,13 +1,12 @@
-# $Id: Makefile.PL 100 2006-06-10 18:19:40Z nanardon $
+# $Id$
 
 # use 5.008;
 use ExtUtils::MakeMaker;
 use Getopt::Long;
 
 #- require at least rpm 4.2
-my $rpm_version = `rpm --version`;
-$rpm_version =~ s/RPM version //;
-$rpm_version =~ /^(?:[5-9]|\d{2}|4\.[2-9])/
+my $rpm_version = `rpm --version` =~ /version ([0-9.]+)$/ ? version->new("v$1") : ();
+$rpm_version ge 4.8.0
     or die <<BARF;
 Unable to build RPM4 with too old (or undetected) rpm version $rpm_version
 BARF
@@ -41,4 +40,5 @@ WriteMakefile(
         'File::Temp' => 0,
         'MDV::Packdrakeng' => 0,
     },
+    dist => { COMPRESS => "xz", SUFFIX => ".xz" },
 );

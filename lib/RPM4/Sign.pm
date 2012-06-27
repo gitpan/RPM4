@@ -10,7 +10,7 @@
 ##- along with this program; if not, write to the Free Software
 ##- Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #
-# $Id: Sign.pm 124 2007-03-07 21:26:14Z nanardon $
+# $Id$
 
 package RPM4::Sign;
 

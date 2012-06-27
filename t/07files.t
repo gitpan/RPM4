@@ -1,4 +1,4 @@
-# $Id: 07files.t 123 2007-03-01 00:11:13Z nanardon $
+# $Id$
 
 use strict;
 use Test::More tests => 11;
