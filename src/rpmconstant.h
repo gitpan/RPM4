@@ -24,16 +24,19 @@
 
 #include <stdio.h>
 #include <rpm/header.h>
-#include <rpm/rpmio.h>
+#include <rpm/rpmbuild.h>
 #include <rpm/rpmdb.h>
-#include <rpm/rpmts.h>
-#include <rpm/rpmte.h>
-#include <rpm/rpmps.h>
 #include <rpm/rpmds.h>
 #include <rpm/rpmfi.h>
-#include <rpm/rpmpgp.h>
-#include <rpm/rpmbuild.h>
+#include <rpm/rpmio.h>
 #include <rpm/rpmlib.h>
+#include <rpm/rpmlog.h>
+#include <rpm/rpmpgp.h>
+#include <rpm/rpmps.h>
+#include <rpm/rpmtag.h>
+#include <rpm/rpmte.h>
+#include <rpm/rpmts.h>
+#include <rpm/rpmvf.h>
 
 /**
  * A constant pair name/value

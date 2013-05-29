@@ -84,6 +84,10 @@
 #include <rpm/rpmlog.h>
 #include <rpm/rpmpgp.h>
 #include <rpm/rpmtag.h>
+#include <rpm/rpmcli.h>
+#ifdef RPM4_9_0
+#include <rpm/rpmsign.h>
+#endif
 
 #ifdef HAVE_RPMCONSTANT
 #include <rpmconstant/rpmconstant.h>
@@ -271,15 +275,6 @@ static void *
         break;
         case RPMCALLBACK_UNINST_STOP:
             s_what = "UNINST_STOP";
-        break;
-        case RPMCALLBACK_REPACKAGE_PROGRESS:
-            s_what = "REPACKAGE_PROGRESS";
-        break;
-        case RPMCALLBACK_REPACKAGE_START:
-            s_what = "REPACKAGE_START";
-        break;
-        case RPMCALLBACK_REPACKAGE_STOP:
-            s_what = "REPACKAGE_STOP";
         break;
         case RPMCALLBACK_UNPACK_ERROR:
             s_what = "UNPACKAGE_ERROR";
@@ -487,6 +482,23 @@ int _headername_vs_dep(Header h, rpmds dep, int nopromote) {
     rpmtdFreeData(&val);
     return rc;
     /* return 1 if match */
+}
+
+/* Hight level function */
+int rpmsign(char *passphrase, const char *rpm) {
+#ifdef RPM4_9_0
+    return rpmPkgSign(rpm, NULL, passphrase);
+#else
+    QVA_t qva = &rpmQVKArgs;
+    ARGV_t file = NULL;
+
+    argvAdd(&file, rpm);
+
+    qva->qva_mode = RPMSIGN_ADD_SIGNATURE;
+    qva->passPhrase = passphrase;
+    
+    return rpmcliSign(NULL, qva, file);
+#endif
 }
 
 MODULE = RPM4 PACKAGE = RPM4
@@ -1460,9 +1472,6 @@ Ts_transflag(ts, sv_transflag = NULL)
     CODE:
     if (sv_transflag != NULL) {
         transflags = sv2transflags(sv_transflag);
-        /* Take care to rpm config (userland) */
-        if (rpmExpandNumeric("%{?_repackage_all_erasures}"))
-            transflags |= RPMTRANS_FLAG_REPACKAGE;
         RETVAL = rpmtsSetFlags(ts, transflags);
     } else {
         RETVAL = rpmtsFlags(ts);
@@ -2655,7 +2664,8 @@ Spec_srcrpm(spec)
 #else   
     header = spec->packages->header;
 #endif
-    int no_src = !headerIsEntry(header, RPMTAG_SOURCERPM);
+    struct rpmtd_s td;
+    int no_src = headerGet(header, RPMTAG_NOSOURCE, &td, HEADERGET_MINMEM);
     char *nvr = headerGetAsString(header, RPMTAG_NVR);
     mXPUSHs(newSVpvf("%s/%s.%ssrc.rpm",
         rpmGetPath("%{_srcrpmdir}", NULL),

@@ -4,14 +4,14 @@
 use ExtUtils::MakeMaker;
 use Getopt::Long;
 
-#- require at least rpm 4.2
-my $rpm_version = `rpm --version` =~ /version ([0-9.]+)$/ ? version->new("v$1") : ();
+#- require at least rpm 4.8
+my $rpm_version = `LC_ALL=C rpm --version` =~ /version ([0-9.]+)(?:-beta.*)?$/ ? version->new("v$1") : ();
 $rpm_version ge 4.8.0
     or die <<BARF;
 Unable to build RPM4 with too old (or undetected) rpm version $rpm_version
 BARF
 
-sub MY::postamble {
+sub MY::postamble() {
     <<MAKECHANGELOG;
 .PHONY: ChangeLog copyrpmconstant
 

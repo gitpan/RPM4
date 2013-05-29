@@ -3,6 +3,7 @@
  */
 
 #include <string.h>
+#include <ctype.h>
 #define RPMCONSTANT_INTERNAL
 #include "rpmconstant.h"
 
@@ -64,7 +65,7 @@ const char * rpmconstPrefix(rpmconst c)
 
 const char * rpmconstName(rpmconst c, int stripprefix)
 {
-    char * name;
+    const char * name;
     int len;
     name = rpmConstantName(c->constant);
     if (stripprefix && name && rpmConstantListPrefix(c->list)) {
